@@ -1,14 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIMPS</title>
+    <link rel="stylesheet" href="{% static 'dist/style.css'%}">
 </head>
 <body>
     
-    <a href = "{%url 'users:login' %}" class = 'btn'> LogIn</a>
-    <a href = "{% url 'users:signup' %}"class = 'btn'>SignUp</a><br>
+    <a href = "{%url 'users:login' %}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"> LogIn</a>
+    <a href = "{% url 'users:signup' %}" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">SignUp</a><br>
     <h1>Welcome to SIMPS</h1>
     
 </body>

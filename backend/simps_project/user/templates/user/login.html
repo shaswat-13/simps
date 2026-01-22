@@ -12,8 +12,10 @@
     <h1>Log In</h1><br>
         <form action="{% url 'users:login' %}" method="post">
         {% csrf_token %}
-        <input type="text" name="Email" placeholder="Username or Email " required>
+        <input type="text" name="Email" value ="{{form_data.Email|default_if_none:''}}" placeholder="Username or Email " required>
         <input type="password" name="Password" placeholder = "Password" required>
         <input type="submit" value="Log In">
+        </form>
+        Are you new here?<a href = "{% url 'users:signup' %}">Create an Account</a>
 </body>
 </html>

@@ -23,7 +23,8 @@ def login(request):
         if (not is_correct):
             errors.append("Invalid username or password")
         if (errors):
-            return render(request,"user/login.html",{"error": errors[0]})
+            context = {"error":errors[0],"form_data":request.POST}
+            return render(request,"user/login.html",context)
         
         #setting session
 
@@ -37,12 +38,15 @@ def login(request):
 def signup(request):
     errors=[]
     if (request.method == 'POST'):
-        full_name = request.POST.get('Full Name')
+        full_name = request.POST.get('Full_Name')
         username = request.POST.get('Username','').strip()
         email = request.POST.get('Email')
         password = request.POST.get('Password').encode('utf-8')
+        confirm_pw = request.POST.get('Confirm_password').encode('utf-8')
         password_hash = bcrypt.hashpw(password,bcrypt.gensalt()).decode('utf-8')
 
+        if(password!=confirm_pw):
+            errors.append("Passwords do not match.")
         #Checking email and username validity
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM users WHERE email = %s",[email])
@@ -60,14 +64,16 @@ def signup(request):
         if ' ' in username:
             errors.append("Username cannot contain spaces.")
         if (errors):
-            return render(request, "user/signup.html",{"error":errors[0]})           
+            context = {"error":errors[0],"form_data":request.POST}
+            return render(request, "user/signup.html",context)      
+
         try:
             #Adding account to DB
             with connection.cursor() as cursor:
                 sql = "INSERT INTO users (full_name,email,password_hash,username) VALUES(%s,%s,%s,%s)"
                 cursor.execute(sql,[full_name,email,password_hash,username])
         except IntegrityError:
-            return render(request, "user/signup.html",{"error":"An account with the email already exists."}) 
+            return render(request, "user/signup.html",{"error":errors[0]}) 
         
         return redirect("users:login")
 
