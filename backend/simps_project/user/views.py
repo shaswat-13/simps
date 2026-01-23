@@ -28,8 +28,8 @@ def login(request):
         
         #setting session
 
-        request.session['user_id']=stored_hash[1]
-        request.session.set_expiry(7*24*60*60)
+        # request.session['user_id']=stored_hash[1]
+        # request.session.set_expiry(7*24*60*60)
         
         #redirect to dashboard
         return redirect("users:landing")

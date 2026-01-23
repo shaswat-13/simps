@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch:css":"npx @tailwindcss/cli -i ./simps_project/static/src/style.css -o ./simps_project/static/dist/style.css --watch"
-  },
+  "watch:css": "npx tailwindcss -i ./static/src/style.css -o ./static/dist/style.css --content './**/templates/**/*.html' --watch"  
+},
   "keywords": [],
   "author": "",
   "license": "ISC",

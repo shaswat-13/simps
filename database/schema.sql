@@ -6,3 +6,4 @@ CREATE TABLE IF NOT EXISTS users (
     date_of_registration TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     username VARCHAR(100) NOT NULL UNIQUE
 );
+
