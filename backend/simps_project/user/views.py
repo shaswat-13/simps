@@ -27,9 +27,11 @@ def login(request):
             return render(request,"user/login.html",context)
         
         #setting session
-
-        # request.session['user_id']=stored_hash[1]
-        # request.session.set_expiry(7*24*60*60)
+        request.session['user_id']=stored_hash[1]
+        if request.POST.get("stayin"):
+            request.session.set_expiry(2*24*60*60)
+        else:
+            request.session.set_expiry(0)
         
         #redirect to dashboard
         return redirect("users:landing")
