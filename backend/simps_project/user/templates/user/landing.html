@@ -2,16 +2,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIMPS</title>
-    <link rel="stylesheet" href="{% static 'dist/style.css'%}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIMPS</title>
+<link rel="stylesheet" href="{% static 'dist/style.css'%}">
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+});
+</script>
 </head>
-<body>
-    
-    <a href = "{%url 'users:login' %}" class="bg-indigo-600  hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"> LogIn</a>
-    <a href = "{% url 'users:signup' %}" class="bg-emerald-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">SignUp</a><br>
-    <h1>Welcome to SIMPS</h1>
-    
+<body class="bg-gray-50 text-gray-700 font-sans">
+
+<!-- Navbar -->
+<nav class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="flex justify-between h-16 items-center">
+      <div class="flex-shrink-0">
+        <span class="text-indigo-800 font-bold text-xl">SIMPS</span>
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center gap-4">
+        <a href="{% url 'users:login' %}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded transition-colors duration-200">Log In</a>
+        <a href="{% url 'users:signup' %}" class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 px-4 rounded transition-colors duration-200">Sign Up</a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button id="mobile-menu-btn" class="text-gray-700 focus:outline-none cursor-pointer">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+ <div
+  id="mobile-menu"
+  class="md:hidden hidden bg-white shadow-md rounded-lg p-4 mx-4 mt-2"
+>
+  <div class="flex flex-col items-end gap-3">
+    <a href="{% url 'users:login' %}" class="inline-flex justify-center items-center h-10 px-6 rounded-md
+             bg-indigo-600 text-white font-medium
+             hover:bg-indigo-700 transition">
+      Log In
+    </a>
+
+    <a href="{% url 'users:signup' %}" class="inline-flex justify-center items-center h-10 px-6 rounded-md
+             bg-emerald-500 text-white font-medium
+             hover:bg-emerald-600 transition">
+      Sign Up
+    </a>
+  </div>
+</div>
+
+</nav>
+
+<!-- Hero Section -->
+<section class="flex flex-col items-center text-center px-6 py-32 lg:px-32 bg-gray-50">
+  <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+    Smart Investment Management & Portfolio System
+  </h1>
+  <p class="text-lg sm:text-xl text-gray-700 max-w-2xl mb-8">
+    Track, analyze, and grow your finances. Monitor your portfolio, explore global markets, and make data-driven decisions for financial growth.
+  </p>
+  <a href="{% url 'users:signup' %}" class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-6 rounded-lg text-lg transition-all duration-200 shadow-lg hover:shadow-xl">
+    Start Your Growth
+  </a>
+</section>
+
+<!-- Features Section -->
+<section class="px-6 py-24 lg:px-32">
+  <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Everything Your Success Needs</h2>
+  <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="bg-white shadow-lg rounded-xl p-8 hover:shadow-2xl transition-shadow duration-300 text-center">
+      <h3 class="text-xl font-semibold mb-2 text-gray-600">Financial Management</h3>
+      <p class="text-gray-600">Track your income, expenses, and budgets effortlessly.</p>
+    </div>
+    <div class="bg-white shadow-lg rounded-xl p-8 hover:shadow-2xl transition-shadow duration-300 text-center">
+      <h3 class="text-xl font-semibold mb-2 text-gray-600">Portfolio Monitoring</h3>
+      <p class="text-gray-600">Keep a close eye on your investments and growth.</p>
+    </div>
+    <div class="bg-white shadow-lg rounded-xl p-8 hover:shadow-2xl transition-shadow duration-300 text-center">
+      <h3 class="text-xl font-semibold mb-2 text-gray-600">Global Market Explorer</h3>
+      <p class="text-gray-600">Explore international markets to diversify your portfolio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Call-to-Action Section -->
+<section class="bg-gray-100 px-6 py-24 lg:px-32 text-center space-y-6">
+  <h2 class="text-3xl font-bold text-gray-900">Take Control of Your Finances</h2>
+  <p class="text-lg text-gray-700 max-w-xl mx-auto">
+    Join SIMPS today and start your journey towards financial freedom.
+  </p>
+  <div class="flex justify-center gap-4 flex-wrap">
+    <a href="{% url 'users:signup' %}" class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow hover:shadow-lg">Create An Account</a>
+    <a href="{% url 'users:login' %}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow hover:shadow-lg">Log In</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-white mt-20 border-t border-gray-200">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 py-8 text-center text-gray-600">
+    <p>&copy; 2026 SIMPS. All rights reserved.</p>
+
+  </div>
+</footer>
+
 </body>
 </html>
