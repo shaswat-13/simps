@@ -4,19 +4,21 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-  "watch:css": "npx tailwindcss -i ./static/src/style.css -o ./static/dist/style.css --content './**/templates/**/*.html' --watch"  
-},
+    "watch:css": "npx tailwindcss -i ./static/src/style.css -o ./static/dist/style.css --content './**/templates/**/*.html' --watch",
+     "runserver": "python manage.py runserver"
+    
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "autoprefixer": "^10.4.23",
+    "concurrently": "^9.2.1",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.18"
   }
-
 }
