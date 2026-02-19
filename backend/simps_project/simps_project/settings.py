@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
 # Load .env file for local development
 load_dotenv()
@@ -64,21 +65,31 @@ TEMPLATES = [
 WSGI_APPLICATION = 'simps_project.wsgi.application'
 
 # Database Configuration (PostgreSQL for Supabase/Railway)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
-        'CONN_MAX_AGE': 600,
-    }
-}
+# Database Configuration
 
-# SSL is required for Supabase in production
-if not DEBUG:
-    DATABASES['default']['OPTIONS'] = {'sslmode': 'require'}
+
+if os.environ.get('DATABASE_URL'):
+    # If Railway provides a single connection string
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+    }
+else:
+    # Use your individual Supabase variables
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('DB_NAME'),
+            'USER': os.environ.get('DB_USER'),
+            'PASSWORD': os.environ.get('DB_PASSWORD'),
+            'HOST': os.environ.get('DB_HOST'),
+            'PORT': os.environ.get('DB_PORT', '5432'),
+            'CONN_MAX_AGE': 600,
+        }
+    }
+
+# Ensure SSL is active for Supabase in production
+if not DEBUG and 'default' in DATABASES:
+    DATABASES['default'].setdefault('OPTIONS', {})['sslmode'] = 'require'
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
