@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#q+-pg$l2e5quh5*d4atl@s8j2bt7%tq6hte81vsv&&5mvorq8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -81,22 +81,18 @@ WSGI_APPLICATION = 'simps_project.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 # for hosting, keeping data in .env files and github secrets file
 
+import dj_database_url
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
-        'CONN_MAX_AGE': 600,
-        'OPTIONS': {
-            'sslmode': 'require',
-        },
+        'NAME': 'postgres', # Usually 'postgres' on Supabase
+        'USER': 'postgres.qweqnmvwzivyeoyyzgzy',
+        'PASSWORD': 'Ocro3HnodXAAqmw8',
+        'HOST': 'aws-1-ap-northeast-2.pooler.supabase.com',
+        'PORT': '5432', # Use 5432 or 6543
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -134,10 +130,12 @@ USE_TZ = True
 # gpt said to keep this, to render static pages
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [
-    (BASE_DIR / "static"),  
-]
+# This is where Django will "collect" all files for production
+STATIC_ROOT = BASE_DIR / 'staticfiles' 
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 SESSION_COOKIE_HTTPONLY = True
 
 
