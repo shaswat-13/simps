@@ -9,14 +9,12 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# On Railway, you will add SECRET_KEY to your Variables tab.
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-for-local-only')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-# Railway provides a random URL; '*' allows all, but you can 
-# add '.railway.app' to be more specific.
+# ALLOWED_HOSTS: Split by comma for Railway domains or use '*'
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 # Application definition
@@ -30,12 +28,13 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic', # Helps WhiteNoise in development
     'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # <--- MUST BE HERE
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # MUST be right after SecurityMiddleware
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -43,8 +42,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'simps_project.urls'
 
@@ -55,7 +52,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug', # Added for better debugging
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -66,8 +63,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'simps_project.wsgi.application'
 
-# Database Configuration
-# Using the variables you mentioned for Railway/Supabase
+# Database Configuration (PostgreSQL for Supabase/Railway)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -80,7 +76,7 @@ DATABASES = {
     }
 }
 
-# If in production (on Railway), enforce SSL for Postgres
+# SSL is required for Supabase in production
 if not DEBUG:
     DATABASES['default']['OPTIONS'] = {'sslmode': 'require'}
 
@@ -100,15 +96,22 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles' # Where files are collected for production
+STATIC_ROOT = BASE_DIR / 'staticfiles' 
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-# WhiteNoise storage to compress and cache static files
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Modern Django 4.2+ Way to handle Static Files with WhiteNoise
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CSRF settings for Railway
+# CSRF settings for Railway security
 CSRF_TRUSTED_ORIGINS = [
     "https://*.railway.app",
     "http://localhost",
