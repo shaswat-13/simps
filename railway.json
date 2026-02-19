@@ -1,0 +1,10 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "rootDirectory": "backend/simps_project"
+  },
+  "deploy": {
+    "startCommand": "gunicorn simps_project.wsgi:application --bind 0.0.0.0:$PORT",
+    "restartPolicyType": "ON_FAILURE"
+  }
+}
