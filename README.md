@@ -112,10 +112,120 @@ PosgreSQL (Relational Database)
 
 ## 📁 Project Structure
 ```bash
+.
+└── simps
+    ├── README.md
+    ├── backend
+    │   ├── README.md
+    │   ├── requirements.txt
+    │   └── simps_project
+    │       ├── Procfile
+    │       ├── dashboard
+    │       │   ├── __init__.py
+    │       │   ├── admin.py
+    │       │   ├── apps.py
+    │       │   ├── db_utils.py
+    │       │   ├── migrations
+    │       │   │   └── __init__.py
+    │       │   ├── models.py
+    │       │   ├── templates
+    │       │   │   └── dashboard
+    │       │   │       ├── add_expense.html
+    │       │   │       ├── add_income.html
+    │       │   │       ├── dashboard.html
+    │       │   │       ├── view_expenses.html
+    │       │   │       ├── view_income.html
+    │       │   │       └── view_savings.html
+    │       │   ├── tests.py
+    │       │   ├── urls.py
+    │       │   └── views.py
+    │       ├── data
+    │       ├── db.sqlite3
+    │       ├── exploration
+    │       │   ├── __init__.py
+    │       │   ├── admin.py
+    │       │   ├── apps.py
+    │       │   ├── migrations
+    │       │   │   └── __init__.py
+    │       │   ├── models.py
+    │       │   ├── static
+    │       │   │   └── exploration
+    │       │   │       └── explore.js
+    │       │   ├── templates
+    │       │   │   └── exploration
+    │       │   │       └── explore.html
+    │       │   ├── tests.py
+    │       │   ├── urls.py
+    │       │   ├── utils.py
+    │       │   └── views.py
+    │       ├── manage.py
+    │       ├── package-lock.json
+    │       ├── package.json
+    │       ├── portfolio
+    │       │   ├── __init__.py
+    │       │   ├── admin.py
+    │       │   ├── apps.py
+    │       │   ├── migrations
+    │       │   │   └── __init__.py
+    │       │   ├── models.py
+    │       │   ├── static
+    │       │   │   └── portfolio
+    │       │   │       └── portfolio.js
+    │       │   ├── templates
+    │       │   │   └── portfolio
+    │       │   │       └── overview.html
+    │       │   ├── tests.py
+    │       │   ├── urls.py
+    │       │   └── views.py
+    │       ├── requirements.txt
+    │       ├── scripts
+    │       │   ├── price_updater.py
+    │       │   └── symbols.csv
+    │       ├── simps_project
+    │       │   ├── __init__.py
+    │       │   ├── asgi.py
+    │       │   ├── settings.py
+    │       │   ├── urls.py
+    │       │   └── wsgi.py
+    │       ├── static
+    │       │   ├── dist
+    │       │   │   └── style.css
+    │       │   ├── favicon.ico
+    │       │   └── src
+    │       │       └── style.css
+    │       ├── staticfiles
+    │       ├── templates
+    │       │   └── base.html
+    │       └── user
+    │           ├── __init__.py
+    │           ├── admin.py
+    │           ├── apps.py
+    │           ├── migrations
+    │           │   └── __init__.py
+    │           ├── models.py
+    │           ├── static
+    │           │   └── user
+    │           │       └── signup.js
+    │           ├── templates
+    │           │   └── user
+    │           │       ├── landing.html
+    │           │       ├── login.html
+    │           │       └── signup.html
+    │           ├── tests.py
+    │           ├── urls.py
+    │           └── views.py
+    ├── database
+    │   ├── README.md
+    │   ├── connection_info.txt
+    │   ├── schema.sql
+    │   └── seed_data.sql
+    ├── frontend
+    │   ├── README.md
+    │   └── package.json
+    ├── railway.json
+    └── requirements.txt
 
-TO BE FILLED LATER
 ```
-
 
 ---
 
