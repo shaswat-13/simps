@@ -17,7 +17,9 @@
     <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <h1 class="text-xl md:text-2xl font-bold text-blue-600">SIMPS</h1>
+                 <a href="{% url 'portfolio:index' %}">
+                        <h1 class="text-xl md:text-2xl font-bold text-blue-600">SIMPS</h1>
+                    </a>
                 
                 <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
                     <a href="{% url 'dashboard:dashboard_home' %}" class="{% if request.resolver_match.app_name == 'dashboard' %}text-blue-600 font-semibold border-b-2 border-blue-600 pb-1{% else %}text-gray-700 hover:text-blue-600{% endif %} transition font-medium text-sm lg:text-base">
