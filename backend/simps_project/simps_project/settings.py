@@ -16,7 +16,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-for-local-on
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # ALLOWED_HOSTS: Split by comma for Railway domains or use '*'
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 # Application definition
 INSTALLED_APPS = [
