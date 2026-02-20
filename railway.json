@@ -4,7 +4,7 @@
     "rootDirectory": "backend/simps_project"
   },
   "deploy": {
-    "startCommand": "gunicorn simps_project.wsgi:application --bind 0.0.0.0:$PORT",
-    "restartPolicyType": "ON_FAILURE"
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
   }
 }
