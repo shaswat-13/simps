@@ -2,10 +2,9 @@
 
 ![Django](https://img.shields.io/badge/Backend-Django-092E20?style=for-the-badge&logo=django)
 ![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python)
-![MySQL](https://img.shields.io/badge/Database-MySQL-4479A1?style=for-the-badge&logo=mysql)
+![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/UI-TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![JavaScript](https://img.shields.io/badge/Frontend-JavaScript-F7DF1E?style=for-the-badge&logo=javascript)
-![License](https://img.shields.io/badge/License-Academic-blue?style=for-the-badge)
 
 ---
 
@@ -16,9 +15,9 @@
 The system enables users to:
 
 - Securely register and authenticate
-- Record monthly income and expenses
-- Automatically calculate savings
-- Explore global investment instruments
+- Record income and expenses
+- Calculate monthly savings
+- Explore global investment options
 - Build and manage a personal portfolio
 
 SIMPS emphasizes strong relational database design, SQL-based modeling, and real-world DBMS implementation.
@@ -80,6 +79,7 @@ PosgreSQL (Relational Database)
 - `savings`
 - `global_equities`
 - `personal_portfolio`
+- `equity_price_history`
 
 ### Relationships
 
@@ -106,7 +106,6 @@ PosgreSQL (Relational Database)
 ### Development Tools
 - Git & GitHub
 - VS Code
-- Thunder Client
 - LaTeX (Documentation)
 
 ---
@@ -125,13 +124,13 @@ TO BE FILLED LATER
 ## 1️⃣ Clone Repository
 
 ```bash
-git clone <xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx>
+git clone https://github.com/shaswat-13/simps.git
 cd simps
 ```
 
 ## 2️⃣ Backend Setup
 ```bash
-cd backend/simps_project
+cd backend/
 python -m venv simps_venv
 source simps_venv/bin/activate   # macOS/Linux
 ```
@@ -142,7 +141,7 @@ simps_venv\Scripts\activate      # Windows
 
 Install dependencies:
 ```bash
-pip install -r ../../requirements.txt
+pip install -r requirements.txt
 ```
 
 ## 3️⃣ Configure Database (PosgreSQL)
@@ -155,16 +154,16 @@ Update the DATABASES configuration:
 ```bash
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'simps_db',
         'USER': 'your_username',
         'PASSWORD': 'your_password',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '5432',
     }
 }
 ```
-Ensure MySQL server is running.
+Ensure PosgreSQL server is running.
 
 ## 4️⃣ Run Migrations
 ```bash
@@ -187,7 +186,7 @@ npm run dev
 ## 🧪 Running the Full System
 1. Start PosgreSQL
 2. Run Frontend server (which automatically runs the backend server)
-3. Open browser and access the application
+3. Open browser and access the application at http://localhost:8000
 ---
 
 ## 👨‍💻 Contributors
@@ -203,8 +202,6 @@ npm run dev
 - Cloud deployment (AWS / GCP / Azure)
 
 ---
-## 📄 License
-Developed for academic purposes at IOE Thapathali Campus.
 
 ### ⭐ If you found this project interesting, consider giving it a star!
 
