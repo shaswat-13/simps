@@ -110,6 +110,77 @@ PosgreSQL (Relational Database)
 
 ---
 
+# ⚙️ Local Setup Guide
+
+## 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/shaswat-13/simps.git
+cd simps
+```
+
+## 2️⃣ Backend Setup
+```bash
+cd backend/
+python -m venv simps_venv
+source simps_venv/bin/activate   # macOS/Linux
+```
+### OR
+```bash
+simps_venv\Scripts\activate      # Windows
+```
+
+Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+## 3️⃣ Configure Database (PosgreSQL)
+
+Open:
+```bash
+backend/simps_project/simps_project/settings.py
+```
+Update the DATABASES configuration:
+```bash
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'simps_db',
+        'USER': 'your_username',
+        'PASSWORD': 'your_password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+```
+Ensure PosgreSQL server is running.
+
+## 4️⃣ Run Migrations
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+## 5️⃣ Populate Database
+Run script:
+```bash
+python scripts/price_updater.py
+```
+## 6️⃣ Run Server
+```bash
+npm install
+npm run dev
+```
+---
+
+## 🧪 Running the Full System
+1. Start PosgreSQL
+2. Run Frontend server (which automatically runs the backend server)
+3. Open browser and access the application at http://localhost:8000
+---
+
+
 ## 📁 Project Structure
 ```bash
 .
@@ -227,76 +298,6 @@ PosgreSQL (Relational Database)
 
 ```
 
----
-
-# ⚙️ Local Setup Guide
-
-## 1️⃣ Clone Repository
-
-```bash
-git clone https://github.com/shaswat-13/simps.git
-cd simps
-```
-
-## 2️⃣ Backend Setup
-```bash
-cd backend/
-python -m venv simps_venv
-source simps_venv/bin/activate   # macOS/Linux
-```
-### OR
-```bash
-simps_venv\Scripts\activate      # Windows
-```
-
-Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-## 3️⃣ Configure Database (PosgreSQL)
-
-Open:
-```bash
-backend/simps_project/simps_project/settings.py
-```
-Update the DATABASES configuration:
-```bash
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'simps_db',
-        'USER': 'your_username',
-        'PASSWORD': 'your_password',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-```
-Ensure PosgreSQL server is running.
-
-## 4️⃣ Run Migrations
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-## 5️⃣ Populate Database
-Run script:
-```bash
-python scripts/price_updater.py
-```
-## 6️⃣ Run Server
-```bash
-npm install
-npm run dev
-```
----
-
-## 🧪 Running the Full System
-1. Start PosgreSQL
-2. Run Frontend server (which automatically runs the backend server)
-3. Open browser and access the application at http://localhost:8000
 ---
 
 ## 👨‍💻 Contributors
