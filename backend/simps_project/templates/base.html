@@ -46,13 +46,13 @@
             
             <div id="mobile-menu" class="hidden md:hidden pb-4">
                 <div class="flex flex-col space-y-3">
-                    <a href="{% url 'dashboard:dashboard_home' %}" class="text-gray-700 hover:text-blue-600 transition font-medium py-2 border-b border-gray-100">
+                    <a href="{% url 'dashboard:dashboard_home' %}" class="{% if request.resolver_match.app_name == 'dashboard' %}text-blue-600 font-semibold border-b-2 border-blue-600 pb-1{% else %}text-gray-700 hover:text-blue-600{% endif %} transition font-medium text-sm lg:text-base">
                         Dashboard
                     </a>
-                    <a href="{% url 'explore:home' %}" class="text-gray-700 hover:text-blue-600 transition font-medium py-2 border-b border-gray-100">
+                    <a href="{% url 'explore:home' %}" class="{% if request.resolver_match.app_name == 'explore' %}text-blue-600 font-semibold border-b-2 border-blue-600 pb-1{% else %}text-gray-700 hover:text-blue-600{% endif %} transition font-medium text-sm lg:text-base">
                         Explore
                     </a>
-                    <a href="{% url 'portfolio:index' %}" class="text-blue-600 font-semibold py-2 border-b border-gray-100">
+                    <a href="{% url 'portfolio:index' %}" class="{% if request.resolver_match.app_name == 'portfolio' %}text-blue-600 font-semibold border-b-2 border-blue-600 pb-1{% else %}text-gray-700 hover:text-blue-600{% endif %} transition font-medium text-sm lg:text-base">
                         Portfolio
                     </a>
                     <form method="POST" action="{% url 'users:logout' %}" class="pt-2">
