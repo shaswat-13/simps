@@ -1,95 +1,90 @@
 {% load static %}
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LogIn</title>
-    <link rel="stylesheet" href="{% static 'dist/style.css' %}" />
-    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'dist/style.css' %}">
     <script src="{% static 'user/signup.js' %}"></script>
-  </head>
+    
+</head>
 
-  <body
-    class="bg-white-900 min-h-screen"
-    data-error="{{error|default:''|escapejs}}"
-  >
+<body class="bg-white-900 min-h-screen" data-error="{{error|default:''|escapejs}}">
+
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <a
-          href="{% url 'users:landing' %}"
-          class="justify-center rounded-md bg-gray-100 px-3 py-2 text-sm font-semibold text-gray-500 hover:bg-gray-200 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >Back</a
-        >
-        <h2
-          class="mt-10 text-center text-2xl font-bold tracking-tight text-black"
-        >
-          Log In To Your Account
-        </h2>
-      </div>
 
-      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form action="{% url 'users:login' %}" method="post" class="space-y-6">
-          {% csrf_token %}
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+            <a href = "{% url 'users:landing' %}" class=" justify-center rounded-md bg-gray-100 px-3 py-2 text-sm font-semibold text-gray-500 hover:bg-gray-200 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">Back</a>
+            <h2 class="mt-10 text-center text-2xl font-bold tracking-tight text-black">
+                Log In To Your Account
+            </h2>
+        </div>
 
-          <div>
-            <label class="block text-sm font-medium text-black-200">
-              Username or Email
-            </label>
-            <div class="mt-2">
-              <input
-                type="text"
-                name="Email"
-                value="{{form_data.Email|default_if_none:''}}"
-                placeholder="Username or Email"
-                required
-                class="block w-full rounded-md bg-white-800 px-3 py-2 text-black placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-          </div>
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form action="{% url 'users:login' %}" method="post" class="space-y-6">
+                {% csrf_token %}
 
-          <div>
-            <label class="block text-sm font-medium text-black-200">
-              Password
-            </label>
-            <div class="mt-2">
-              <input
-                type="password"
-                name="Password"
-                placeholder="Password"
-                required
-                class="block w-full rounded-md bg-white-800 px-3 py-2 text-black placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-          </div>
-          <div class="flex items-center gap-2">
-            <input
-              type="checkbox"
-              name="stayin"
-              class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded accent-color-blue-600"
-            />
-            <label class="block text-sm text-gray-900"> Stay logged in </label>
-          </div>
-          <div>
-            <input
-              type="submit"
-              value="Log In"
-              class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
-            />
-          </div>
-        </form>
+                <div>
+                    <label class="block text-sm font-medium text-black-200">
+                        Username or Email
+                    </label>
+                    <div class="mt-2">
+                        <input
+                            type="text"
+                            name="Email"
+                            value="{{form_data.Email|default_if_none:''}}"
+                            placeholder="Username or Email"
+                            required
+                            class="block w-full rounded-md bg-white-800 px-3 py-2 text-black placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        >
+                    </div>
+                </div>
 
-        <p class="mt-10 text-center text-sm text-black-400">
-          Are you new here?
-          <a
-            href="{% url 'users:signup' %}"
-            class="font-semibold text-blue-400 hover:text-blue-300"
-          >
-            Create an Account
-          </a>
-        </p>
-      </div>
+                <div>
+                    <label class="block text-sm font-medium text-black-200">
+                        Password
+                    </label>
+                    <div class="mt-2">
+                        <input
+                            type="password"
+                            name="Password"
+                            placeholder="Password"
+                            required
+                            class="block w-full rounded-md bg-white-800 px-3 py-2 text-black placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        >
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    
+                        <input
+                            type="checkbox"
+                            name="stayin"
+                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded accent-color-indigo-600"
+                        >
+                        <label class="block text-sm text-gray-900">
+                         Stay logged in
+                    </label>
+
+                </div>
+                <div>
+                    <input
+                        type="submit"
+                        value="Log In"
+                        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+                    >
+                </div>
+            </form>
+
+            <p class="mt-10 text-center text-sm text-black-400">
+                Are you new here?
+                <a href="{% url 'users:signup' %}" class="font-semibold text-indigo-400 hover:text-indigo-300">
+                    Create an Account
+                </a>
+            </p>
+        </div>
+
     </div>
-  </body>
+</body>
 </html>

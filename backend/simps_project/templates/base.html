@@ -1,119 +1,88 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}SIMPS{%endblock%}</title>
-    <link rel="stylesheet" href="{% static 'dist/style.css'%}" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'dist/style.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     {%block extra_head %}{%endblock%}
-  </head>
-  <body class="bg-gray-50 min-h-screen">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    
     <nav class="bg-white shadow-md sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-          {% if user.is_authenticated %}
-          <a href="{% url 'portfolio:index' %}">
-            <h1 class="text-xl md:text-2xl font-bold text-blue-600">SIMPS</h1>
-          </a>
-          {% else %}
-          <a href="{% url 'users:landing' %}">
-            <h1 class="text-xl md:text-2xl font-bold text-blue-600">SIMPS</h1>
-          </a>
-          {% endif %}
-
-          <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
-            <a
-              href="{% url 'dashboard:dashboard_home' %}"
-              class="{% if request.resolver_match.app_name == 'dashboard' %}text-blue-600 font-semibold border-b-2 border-blue-600 pb-1{% else %}text-gray-700 hover:text-blue-600{% endif %} transition font-medium text-sm lg:text-base"
-            >
-              Dashboard
-            </a>
-            <a
-              href="{% url 'explore:home' %}"
-              class="{% if request.resolver_match.app_name == 'explore' %}text-blue-600 font-semibold border-b-2 border-blue-600 pb-1{% else %}text-gray-700 hover:text-blue-600{% endif %} transition font-medium text-sm lg:text-base"
-            >
-              Explore
-            </a>
-            <a
-              href="{% url 'portfolio:index' %}"
-              class="{% if request.resolver_match.app_name == 'portfolio' %}text-blue-600 font-semibold border-b-2 border-blue-600 pb-1{% else %}text-gray-700 hover:text-blue-600{% endif %} transition font-medium text-sm lg:text-base"
-            >
-              Portfolio
-            </a>
-            <form
-              method="POST"
-              action="{% url 'users:logout' %}"
-              class="inline"
-            >
-              {% csrf_token %}
-              <button
-                type="submit"
-                class="px-3 lg:px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition font-medium cursor-pointer text-sm lg:text-base"
-              >
-                Logout
-              </button>
-            </form>
-          </div>
-
-          <button
-            id="mobile-menu-btn"
-            class="md:hidden text-gray-700 hover:text-blue-600 focus:outline-none"
-          >
-            <i class="fas fa-bars text-2xl"></i>
-          </button>
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'portfolio:index' %}">
+                        <h1 class="text-xl md:text-2xl font-bold text-indigo-600">SIMPS</h1>
+                    </a>
+                {% else %}
+                    <a href="{% url 'users:landing' %}">
+                        <h1 class="text-xl md:text-2xl font-bold text-indigo-600">SIMPS</h1>
+                    </a>
+                {% endif %}
+                
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                    <a href="{% url 'dashboard:dashboard_home' %}" class="{% if request.resolver_match.app_name == 'dashboard' %}text-indigo-600 font-semibold border-b-2 border-indigo-600 pb-1{% else %}text-gray-700 hover:text-indigo-600{% endif %} transition font-medium text-sm lg:text-base">
+                        Dashboard
+                    </a>
+                    <a href="{% url 'explore:home' %}" class="{% if request.resolver_match.app_name == 'explore' %}text-indigo-600 font-semibold border-b-2 border-indigo-600 pb-1{% else %}text-gray-700 hover:text-indigo-600{% endif %} transition font-medium text-sm lg:text-base">
+                        Explore
+                    </a>
+                    <a href="{% url 'portfolio:index' %}" class="{% if request.resolver_match.app_name == 'portfolio' %}text-indigo-600 font-semibold border-b-2 border-indigo-600 pb-1{% else %}text-gray-700 hover:text-indigo-600{% endif %} transition font-medium text-sm lg:text-base">
+                        Portfolio
+                    </a>
+                    <form method="POST" action="{% url 'users:logout' %}" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="px-3 lg:px-4 py-2 bg-rose-500 text-white rounded-lg hover:bg-rose-600 transition font-medium cursor-pointer text-sm lg:text-base">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+                
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700 hover:text-indigo-600 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="#" class="text-gray-700 hover:text-indigo-600 transition font-medium py-2 border-b border-gray-100">
+                        Dashboard
+                    </a>
+                    <a href="#" class="text-gray-700 hover:text-indigo-600 transition font-medium py-2 border-b border-gray-100">
+                        Explore
+                    </a>
+                    <a href="{% url 'portfolio:index' %}" class="text-indigo-600 font-semibold py-2 border-b border-gray-100">
+                        Portfolio
+                    </a>
+                    <form method="POST" action="{% url 'users:logout' %}" class="pt-2">
+                        {% csrf_token %}
+                        <button type="submit" class="w-full px-4 py-2 bg-rose-500 text-white rounded-lg hover:bg-rose-600 transition font-medium ">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div id="mobile-menu" class="hidden md:hidden pb-4">
-          <div class="flex flex-col space-y-3">
-            <a
-              href="#"
-              class="text-gray-700 hover:text-blue-600 transition font-medium py-2 border-b border-gray-100"
-            >
-              Dashboard
-            </a>
-            <a
-              href="#"
-              class="text-gray-700 hover:text-blue-600 transition font-medium py-2 border-b border-gray-100"
-            >
-              Explore
-            </a>
-            <a
-              href="{% url 'portfolio:index' %}"
-              class="text-blue-600 font-semibold py-2 border-b border-gray-100"
-            >
-              Portfolio
-            </a>
-            <form method="POST" action="{% url 'users:logout' %}" class="pt-2">
-              {% csrf_token %}
-              <button
-                type="submit"
-                class="w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition font-medium"
-              >
-                Logout
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
     </nav>
 
-    <main>{%block content%} {%endblock%}</main>
+    <main>
+        {%block content%}
+        {%endblock%}
+    </main>
 
     <script>
-      document
-        .getElementById("mobile-menu-btn")
-        ?.addEventListener("click", function () {
-          document.getElementById("mobile-menu").classList.toggle("hidden");
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         });
     </script>
 
     {% block extra_scripts %}{% endblock %}
-  </body>
+
+</body>
 </html>

@@ -123,9 +123,9 @@ def edit_holding(request, portfolio_id):
         percentage = ((current_price-purchase_price)*100)/purchase_price
 
         if percentage >=0:
-            percentage_html = f"<span class = 'text-green-500 flex items-center justify-end space-x-1'></span>{round(percentage,2)}%</span><i class='fa-solid fa-arrow-trend-up'></i></span>"
+            percentage_html = f"<span class = 'text-emerald-500 flex items-center justify-end space-x-1'></span>{round(percentage,2)}%</span><i class='fa-solid fa-arrow-trend-up'></i></span>"
         else:
-            percentage_html = f"<span class = 'text-red-500 flex items-center justify-end space-x-1'></span>{round(percentage,2)}%</span><i class='fa-solid fa-arrow-trend-down'></i></span>"
+            percentage_html = f"<span class = 'text-rose-500 flex items-center justify-end space-x-1'></span>{round(percentage,2)}%</span><i class='fa-solid fa-arrow-trend-down'></i></span>"
 
         cursor.execute("""SELECT p.quantity,p.purchase_price,e.current_price FROM 
                        personal_portfolio p
