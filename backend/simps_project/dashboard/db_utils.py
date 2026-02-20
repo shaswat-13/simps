@@ -4,10 +4,6 @@ import psycopg2.extras
 from django.conf import settings
 
 def get_db_connection():
-    """
-    Connects to the PostgreSQL database defined in Django settings.
-    Supports SSL for Supabase.
-    """
     connection = psycopg2.connect(
         dbname=settings.DATABASES['default']['NAME'],
         user=settings.DATABASES['default']['USER'],
@@ -19,11 +15,6 @@ def get_db_connection():
     return connection
 
 def execute_query(query, params=None, fetch=False):
-    """
-    Executes a SQL query on PostgreSQL.
-    - fetch=True -> SELECT queries, returns a list of dicts
-    - fetch=False -> INSERT/UPDATE/DELETE, returns last inserted ID (if available)
-    """
     connection = get_db_connection()
     cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
     
@@ -35,10 +26,8 @@ def execute_query(query, params=None, fetch=False):
             return result
         else:
             connection.commit()
-            # PostgreSQL requires RETURNING to get last inserted ID
             if query.strip().upper().startswith("INSERT"):
                 try:
-                    # Try to get the id if RETURNING was used
                     return cursor.fetchone()['id']
                 except:
                     return None
