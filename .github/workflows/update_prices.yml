@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "Installing dependencies..."
           python -m pip install --upgrade pip
-          pip install -r backend/requirements.txt
+          pip install -r backend/simps_project/requirements.txt
 
       # Verify environment variables
       - name: Verify Environment Variables
