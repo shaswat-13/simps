@@ -1,118 +1,189 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block title %}View Savings - SIMPS{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block title %}View Savings -
+SIMPS{% endblock %} {% block content %}
 <div class="max-w-7xl mx-auto px-4 py-8">
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-        <h1 class="text-3xl font-bold text-gray-900">Savings Analysis</h1>
-        <button onclick="calculateCurrentSavings()" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition font-medium shadow-md flex items-center">
-            <i class="fas fa-calculator mr-2"></i> Calculate Monthly Savings
-        </button>
+  <div
+    class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"
+  >
+    <h1 class="text-3xl font-bold text-gray-900">Savings Analysis</h1>
+    <button
+      onclick="calculateCurrentSavings()"
+      class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-medium shadow-md flex items-center"
+    >
+      <i class="fas fa-calculator mr-2"></i> Calculate Monthly Savings
+    </button>
+  </div>
+
+  <div id="message" class="hidden mb-6 p-4 rounded-lg"></div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+    <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-green-500">
+      <p class="text-gray-500 text-sm font-medium uppercase tracking-wider">
+        Total Income
+      </p>
+      <p id="totalIncome" class="text-3xl font-bold text-green-600 mt-1">
+        $0.00
+      </p>
     </div>
-
-    <div id="message" class="hidden mb-6 p-4 rounded-lg"></div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-emerald-500">
-            <p class="text-gray-500 text-sm font-medium uppercase tracking-wider">Total Income</p>
-            <p id="totalIncome" class="text-3xl font-bold text-emerald-600 mt-1">$0.00</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-rose-500">
-            <p class="text-gray-500 text-sm font-medium uppercase tracking-wider">Total Expenses</p>
-            <p id="totalExpenses" class="text-3xl font-bold text-rose-600 mt-1">$0.00</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-indigo-500">
-            <p class="text-gray-500 text-sm font-medium uppercase tracking-wider">Net Savings</p>
-            <p id="totalSavings" class="text-3xl font-bold text-indigo-600 mt-1">$0.00</p>
-        </div>
+    <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-500">
+      <p class="text-gray-500 text-sm font-medium uppercase tracking-wider">
+        Total Expenses
+      </p>
+      <p id="totalExpenses" class="text-3xl font-bold text-red-600 mt-1">
+        $0.00
+      </p>
     </div>
-
-    <div class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100">
-        <div class="px-6 py-4 bg-gray-50 border-b flex justify-between items-center">
-            <h2 class="text-lg font-bold text-gray-800">Monthly Breakdown</h2>
-            <i class="fas fa-chart-line text-gray-400"></i>
-        </div>
-        <div class="overflow-x-auto">
-            <table class="w-full">
-                <thead class="bg-white border-b">
-                    <tr>
-                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Month</th>
-                        <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600">Income</th>
-                        <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600">Expenses</th>
-                        <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600">Savings</th>
-                        <th class="px-6 py-4 text-center text-sm font-semibold text-gray-600">Status</th>
-                    </tr>
-                </thead>
-                <tbody id="savingsTableBody" class="divide-y divide-gray-100"></tbody>
-            </table>
-        </div>
-        <div id="emptyState" class="hidden p-12 text-center text-gray-500">
-            <p>No savings data available yet.</p>
-        </div>
+    <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-500">
+      <p class="text-gray-500 text-sm font-medium uppercase tracking-wider">
+        Net Savings
+      </p>
+      <p id="totalSavings" class="text-3xl font-bold text-blue-600 mt-1">
+        $0.00
+      </p>
     </div>
+  </div>
 
-    <a href="{% url 'dashboard:dashboard_home' %}" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 mt-8 font-medium">
-        <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
-    </a>
+  <div
+    class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100"
+  >
+    <div
+      class="px-6 py-4 bg-gray-50 border-b flex justify-between items-center"
+    >
+      <h2 class="text-lg font-bold text-gray-800">Monthly Breakdown</h2>
+      <i class="fas fa-chart-line text-gray-400"></i>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="bg-white border-b">
+          <tr>
+            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+              Month
+            </th>
+            <th
+              class="px-6 py-4 text-right text-sm font-semibold text-gray-600"
+            >
+              Income
+            </th>
+            <th
+              class="px-6 py-4 text-right text-sm font-semibold text-gray-600"
+            >
+              Expenses
+            </th>
+            <th
+              class="px-6 py-4 text-right text-sm font-semibold text-gray-600"
+            >
+              Savings
+            </th>
+            <th
+              class="px-6 py-4 text-center text-sm font-semibold text-gray-600"
+            >
+              Status
+            </th>
+          </tr>
+        </thead>
+        <tbody id="savingsTableBody" class="divide-y divide-gray-100"></tbody>
+      </table>
+    </div>
+    <div id="emptyState" class="hidden p-12 text-center text-gray-500">
+      <p>No savings data available yet.</p>
+    </div>
+  </div>
+
+  <a
+    href="{% url 'dashboard:dashboard_home' %}"
+    class="inline-flex items-center text-blue-600 hover:text-blue-800 mt-8 font-medium"
+  >
+    <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+  </a>
 </div>
-{% endblock %}
-
-{% block extra_scripts %}
+{% endblock %} {% block extra_scripts %}
 <script>
-    async function loadSavingsData() {
-        try {
-            const response = await fetch("{% url 'dashboard:get_savings' %}?user_id=1");
-            const result = await response.json();
-            const tableBody = document.getElementById('savingsTableBody');
-            
-            if (result.status === 'success' && result.data.length > 0) {
-                tableBody.innerHTML = '';
-                let tInc = 0, tExp = 0, tSav = 0;
-                
-                result.data.forEach(saving => {
-                    const sAmt = parseFloat(saving.savings_amount);
-                    tInc += parseFloat(saving.total_income);
-                    tExp += parseFloat(saving.total_expenses);
-                    tSav += sAmt;
-                    
-                    const isPositive = sAmt >= 0;
-                    tableBody.innerHTML += `
+  async function loadSavingsData() {
+    try {
+      const response = await fetch(
+        "{% url 'dashboard:get_savings' %}?user_id=1",
+      );
+      const result = await response.json();
+      const tableBody = document.getElementById("savingsTableBody");
+
+      if (result.status === "success" && result.data.length > 0) {
+        tableBody.innerHTML = "";
+        let tInc = 0,
+          tExp = 0,
+          tSav = 0;
+
+        result.data.forEach((saving) => {
+          const sAmt = parseFloat(saving.savings_amount);
+          tInc += parseFloat(saving.total_income);
+          tExp += parseFloat(saving.total_expenses);
+          tSav += sAmt;
+
+          const isPositive = sAmt >= 0;
+          tableBody.innerHTML += `
                         <tr class="hover:bg-gray-50 transition">
                             <td class="px-6 py-4 text-sm font-bold text-gray-900">${getMonthName(saving.month)} ${saving.year}</td>
-                            <td class="px-6 py-4 text-sm text-emerald-600 text-right font-medium">$${parseFloat(saving.total_income).toFixed(2)}</td>
-                            <td class="px-6 py-4 text-sm text-rose-600 text-right font-medium">$${parseFloat(saving.total_expenses).toFixed(2)}</td>
-                            <td class="px-6 py-4 text-sm text-right font-bold ${isPositive ? 'text-indigo-600' : 'text-rose-700'}">$${Math.abs(sAmt).toFixed(2)}</td>
+                            <td class="px-6 py-4 text-sm text-green-600 text-right font-medium">$${parseFloat(saving.total_income).toFixed(2)}</td>
+                            <td class="px-6 py-4 text-sm text-red-600 text-right font-medium">$${parseFloat(saving.total_expenses).toFixed(2)}</td>
+                            <td class="px-6 py-4 text-sm text-right font-bold ${isPositive ? "text-blue-600" : "text-red-700"}">$${Math.abs(sAmt).toFixed(2)}</td>
                             <td class="px-6 py-4 text-center">
-                                <span class="px-3 py-1 rounded-full text-xs font-bold uppercase ${isPositive ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">
-                                    <i class="fas ${isPositive ? 'fa-caret-up' : 'fa-caret-down'} mr-1"></i>${isPositive ? 'Surplus' : 'Deficit'}
+                                <span class="px-3 py-1 rounded-full text-xs font-bold uppercase ${isPositive ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}">
+                                    <i class="fas ${isPositive ? "fa-caret-up" : "fa-caret-down"} mr-1"></i>${isPositive ? "Surplus" : "Deficit"}
                                 </span>
                             </td>
                         </tr>`;
-                });
-                
-                document.getElementById('totalIncome').innerText = `$${tInc.toFixed(2)}`;
-                document.getElementById('totalExpenses').innerText = `$${tExp.toFixed(2)}`;
-                document.getElementById('totalSavings').innerText = `$${tSav.toFixed(2)}`;
-            }
-        } catch (error) { console.error(error); }
-    }
+        });
 
-    async function calculateCurrentSavings() {
-        const now = new Date();
-        try {
-            const response = await fetch("{% url 'dashboard:calculate_savings' %}", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}' },
-                body: JSON.stringify({ user_id: 1, month: now.getMonth() + 1, year: now.getFullYear() })
-            });
-            const result = await response.json();
-            if (result.status === 'success') { loadSavingsData(); }
-        } catch (error) { console.error(error); }
+        document.getElementById("totalIncome").innerText =
+          `$${tInc.toFixed(2)}`;
+        document.getElementById("totalExpenses").innerText =
+          `$${tExp.toFixed(2)}`;
+        document.getElementById("totalSavings").innerText =
+          `$${tSav.toFixed(2)}`;
+      }
+    } catch (error) {
+      console.error(error);
     }
+  }
 
-    function getMonthName(m) { return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][m - 1]; }
-    loadSavingsData();
+  async function calculateCurrentSavings() {
+    const now = new Date();
+    try {
+      const response = await fetch("{% url 'dashboard:calculate_savings' %}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": "{{ csrf_token }}",
+        },
+        body: JSON.stringify({
+          user_id: 1,
+          month: now.getMonth() + 1,
+          year: now.getFullYear(),
+        }),
+      });
+      const result = await response.json();
+      if (result.status === "success") {
+        loadSavingsData();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function getMonthName(m) {
+    return [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ][m - 1];
+  }
+  loadSavingsData();
 </script>
 {% endblock %}

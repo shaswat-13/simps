@@ -1,191 +1,205 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block title %}Dashboard - SIMPS{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block title %}Dashboard - SIMPS{%
+endblock %} {% block content %}
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    
-    <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-8">
-        Financial Dashboard
-    </h1>
+  <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-8">
+    Financial Dashboard
+  </h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <div class="bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition-shadow">
-            <div class="flex items-center justify-between mb-2">
-                <p class="text-gray-600 text-sm">Total Income</p>
-                <i class="fas fa-arrow-up text-emerald-500 text-xl"></i>
-            </div>
-            <p id="total-income" class="text-gray-900 text-3xl font-bold">$0.00</p>
-            <p class="text-gray-500 text-xs mt-2">This month</p>
-        </div>
-
-        <div class="bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition-shadow">
-            <div class="flex items-center justify-between mb-2">
-                <p class="text-gray-600 text-sm">Total Expenses</p>
-                <i class="fas fa-arrow-down text-rose-500 text-xl"></i>
-            </div>
-            <p id="total-expenses" class="text-gray-900 text-3xl font-bold">$0.00</p>
-            <p class="text-gray-500 text-xs mt-2">This month</p>
-        </div>
-
-        <div class="bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition-shadow">
-            <div class="flex items-center justify-between mb-2">
-                <p class="text-gray-600 text-sm">Net Savings</p>
-                <i class="fas fa-piggy-bank text-indigo-500 text-xl"></i>
-            </div>
-            <p id="net-savings" class="text-3xl font-bold text-indigo-600">$0.00</p>
-            <p class="text-gray-500 text-xs mt-2">This month</p>
-        </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+    <div
+      class="bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition-shadow"
+    >
+      <div class="flex items-center justify-between mb-2">
+        <p class="text-gray-600 text-sm">Total Income</p>
+        <i class="fas fa-arrow-up text-green-500 text-xl"></i>
+      </div>
+      <p id="total-income" class="text-gray-900 text-3xl font-bold">$0.00</p>
+      <p class="text-gray-500 text-xs mt-2">This month</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-        <a href="{% url 'dashboard:add_income_page' %}" class="block">
-            <div class="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-6 hover:bg-emerald-100 transition-colors cursor-pointer">
-                <div class="flex items-center space-x-4">
-                    <div class="bg-emerald-500 text-white p-4 rounded-full">
-                        <i class="fas fa-plus text-2xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-900">Add Income</h3>
-                        <p class="text-gray-600 text-sm">Record your earnings</p>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        <a href="{% url 'dashboard:add_expense_page' %}" class="block">
-            <div class="bg-rose-50 border-2 border-rose-200 rounded-xl p-6 hover:bg-rose-100 transition-colors cursor-pointer">
-                <div class="flex items-center space-x-4">
-                    <div class="bg-rose-500 text-white p-4 rounded-full">
-                        <i class="fas fa-minus text-2xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-900">Add Expense</h3>
-                        <p class="text-gray-600 text-sm">Track your spending</p>
-                    </div>
-                </div>
-            </div>
-        </a>
+    <div
+      class="bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition-shadow"
+    >
+      <div class="flex items-center justify-between mb-2">
+        <p class="text-gray-600 text-sm">Total Expenses</p>
+        <i class="fas fa-arrow-down text-red-500 text-xl"></i>
+      </div>
+      <p id="total-expenses" class="text-gray-900 text-3xl font-bold">$0.00</p>
+      <p class="text-gray-500 text-xs mt-2">This month</p>
     </div>
 
-    <div class="mb-6">
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">Your Financial Data</h2>
+    <div
+      class="bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition-shadow"
+    >
+      <div class="flex items-center justify-between mb-2">
+        <p class="text-gray-600 text-sm">Net Savings</p>
+        <i class="fas fa-piggy-bank text-blue-500 text-xl"></i>
+      </div>
+      <p id="net-savings" class="text-3xl font-bold text-blue-600">$0.00</p>
+      <p class="text-gray-500 text-xs mt-2">This month</p>
     </div>
+  </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <a href="{% url 'dashboard:view_income_page' %}" class="block bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition">
-            <div class="flex items-center space-x-4">
-                <i class="fas fa-list text-3xl text-emerald-500"></i>
-                <div>
-                    <h3 class="text-xl font-bold text-gray-900">View Income</h3>
-                    <p class="text-gray-600 text-sm">See all income entries</p>
-                </div>
-            </div>
-        </a>
-
-        <a href="{% url 'dashboard:view_expenses_page' %}" class="block bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition">
-            <div class="flex items-center space-x-4">
-                <i class="fas fa-list text-3xl text-rose-500"></i>
-                <div>
-                    <h3 class="text-xl font-bold text-gray-900">View Expenses</h3>
-                    <p class="text-gray-600 text-sm">See all expense entries</p>
-                </div>
-            </div>
-        </a>
-
-        <a href="{% url 'dashboard:view_savings_page' %}" class="block bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition">
-            <div class="flex items-center space-x-4">
-                <i class="fas fa-chart-line text-3xl text-indigo-500"></i>
-                <div>
-                    <h3 class="text-xl font-bold text-gray-900">View Savings</h3>
-                    <p class="text-gray-600 text-sm">Track your savings</p>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <div class="bg-white shadow-lg rounded-xl overflow-hidden">
-        <div class="px-6 py-4 bg-indigo-50 border-b">
-            <h2 class="text-xl font-bold text-gray-900">Quick Stats</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+    <a href="{% url 'dashboard:add_income_page' %}" class="block">
+      <div
+        class="bg-green-50 border-2 border-green-200 rounded-xl p-6 hover:bg-green-100 transition-colors cursor-pointer"
+      >
+        <div class="flex items-center space-x-4">
+          <div class="bg-green-500 text-white p-4 rounded-full">
+            <i class="fas fa-plus text-2xl"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-gray-900">Add Income</h3>
+            <p class="text-gray-600 text-sm">Record your earnings</p>
+          </div>
         </div>
-        <div class="p-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="flex items-center space-x-4">
-                    <div class="bg-emerald-100 p-3 rounded-full">
-                        <i class="fas fa-wallet text-emerald-600 text-2xl"></i>
-                    </div>
-                    <div>
-                        <p class="text-gray-600 text-sm">Income Entries</p>
-                        <p id="income-count" class="text-2xl font-bold text-gray-900">0</p>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <div class="bg-rose-100 p-3 rounded-full">
-                        <i class="fas fa-receipt text-rose-600 text-2xl"></i>
-                    </div>
-                    <div>
-                        <p class="text-gray-600 text-sm">Expense Entries</p>
-                        <p id="expense-count" class="text-2xl font-bold text-gray-900">0</p>
-                    </div>
-                </div>
-            </div>
+      </div>
+    </a>
+
+    <a href="{% url 'dashboard:add_expense_page' %}" class="block">
+      <div
+        class="bg-red-50 border-2 border-red-200 rounded-xl p-6 hover:bg-red-100 transition-colors cursor-pointer"
+      >
+        <div class="flex items-center space-x-4">
+          <div class="bg-red-500 text-white p-4 rounded-full">
+            <i class="fas fa-minus text-2xl"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-gray-900">Add Expense</h3>
+            <p class="text-gray-600 text-sm">Track your spending</p>
+          </div>
         </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="mb-6">
+    <h2 class="text-2xl font-bold text-gray-900 mb-4">Your Financial Data</h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+    <a
+      href="{% url 'dashboard:view_income_page' %}"
+      class="block bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition"
+    >
+      <div class="flex items-center space-x-4">
+        <i class="fas fa-list text-3xl text-green-500"></i>
+        <div>
+          <h3 class="text-xl font-bold text-gray-900">View Income</h3>
+          <p class="text-gray-600 text-sm">See all income entries</p>
+        </div>
+      </div>
+    </a>
+
+    <a
+      href="{% url 'dashboard:view_expenses_page' %}"
+      class="block bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition"
+    >
+      <div class="flex items-center space-x-4">
+        <i class="fas fa-list text-3xl text-red-500"></i>
+        <div>
+          <h3 class="text-xl font-bold text-gray-900">View Expenses</h3>
+          <p class="text-gray-600 text-sm">See all expense entries</p>
+        </div>
+      </div>
+    </a>
+
+    <a
+      href="{% url 'dashboard:view_savings_page' %}"
+      class="block bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition"
+    >
+      <div class="flex items-center space-x-4">
+        <i class="fas fa-chart-line text-3xl text-blue-500"></i>
+        <div>
+          <h3 class="text-xl font-bold text-gray-900">View Savings</h3>
+          <p class="text-gray-600 text-sm">Track your savings</p>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="bg-white shadow-lg rounded-xl overflow-hidden">
+    <div class="px-6 py-4 bg-blue-50 border-b">
+      <h2 class="text-xl font-bold text-gray-900">Quick Stats</h2>
     </div>
+    <div class="p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="flex items-center space-x-4">
+          <div class="bg-green-100 p-3 rounded-full">
+            <i class="fas fa-wallet text-green-600 text-2xl"></i>
+          </div>
+          <div>
+            <p class="text-gray-600 text-sm">Income Entries</p>
+            <p id="income-count" class="text-2xl font-bold text-gray-900">0</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <div class="bg-red-100 p-3 rounded-full">
+            <i class="fas fa-receipt text-red-600 text-2xl"></i>
+          </div>
+          <div>
+            <p class="text-gray-600 text-sm">Expense Entries</p>
+            <p id="expense-count" class="text-2xl font-bold text-gray-900">0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{% endblock %}
-
-{% block extra_scripts %}
+{% endblock %} {% block extra_scripts %}
 <script>
-    async function loadDashboardData() {
-        const currentDate = new Date();
-        const month = currentDate.getMonth() + 1;
-        const year = currentDate.getFullYear();
+  async function loadDashboardData() {
+    const currentDate = new Date();
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
 
-        try {
-            // Updated paths to match dashboard namespace
-            const incomeResponse = await fetch("{% url 'dashboard:get_income' %}");
-            const expenseResponse = await fetch("{% url 'dashboard:get_expenses' %}");
-            
-            const incomeResult = await incomeResponse.json();
-            const expenseResult = await expenseResponse.json();
+    try {
+      // Updated paths to match dashboard namespace
+      const incomeResponse = await fetch("{% url 'dashboard:get_income' %}");
+      const expenseResponse = await fetch("{% url 'dashboard:get_expenses' %}");
 
-            let monthlyIncome = 0;
-            let monthlyExpenses = 0;
-            let incomeCount = 0;
-            let expenseCount = 0;
+      const incomeResult = await incomeResponse.json();
+      const expenseResult = await expenseResponse.json();
 
-            if (incomeResult.status === 'success') {
-                incomeCount = incomeResult.data.length;
-                incomeResult.data.forEach(income => {
-                    if (income.month === month && income.year === year) {
-                        monthlyIncome += parseFloat(income.amount);
-                    }
-                });
-            }
+      let monthlyIncome = 0;
+      let monthlyExpenses = 0;
+      let incomeCount = 0;
+      let expenseCount = 0;
 
-            if (expenseResult.status === 'success') {
-                expenseCount = expenseResult.data.length;
-                expenseResult.data.forEach(expense => {
-                    if (expense.month === month && expense.year === year) {
-                        monthlyExpenses += parseFloat(expense.amount);
-                    }
-                });
-            }
+      if (incomeResult.status === "success") {
+        incomeCount = incomeResult.data.length;
+        incomeResult.data.forEach((income) => {
+          if (income.month === month && income.year === year) {
+            monthlyIncome += parseFloat(income.amount);
+          }
+        });
+      }
 
-            const monthlySavings = monthlyIncome - monthlyExpenses;
+      if (expenseResult.status === "success") {
+        expenseCount = expenseResult.data.length;
+        expenseResult.data.forEach((expense) => {
+          if (expense.month === month && expense.year === year) {
+            monthlyExpenses += parseFloat(expense.amount);
+          }
+        });
+      }
 
-            document.getElementById('total-income').textContent = `$${monthlyIncome.toFixed(2)}`;
-            document.getElementById('total-expenses').textContent = `$${monthlyExpenses.toFixed(2)}`;
-            document.getElementById('net-savings').textContent = `$${monthlySavings.toFixed(2)}`;
-            document.getElementById('income-count').textContent = incomeCount;
-            document.getElementById('expense-count').textContent = expenseCount;
+      const monthlySavings = monthlyIncome - monthlyExpenses;
 
-        } catch (error) {
-            console.error('Error loading dashboard data:', error);
-        }
+      document.getElementById("total-income").textContent =
+        `$${monthlyIncome.toFixed(2)}`;
+      document.getElementById("total-expenses").textContent =
+        `$${monthlyExpenses.toFixed(2)}`;
+      document.getElementById("net-savings").textContent =
+        `$${monthlySavings.toFixed(2)}`;
+      document.getElementById("income-count").textContent = incomeCount;
+      document.getElementById("expense-count").textContent = expenseCount;
+    } catch (error) {
+      console.error("Error loading dashboard data:", error);
     }
+  }
 
-    loadDashboardData();
+  loadDashboardData();
 </script>
 {% endblock %}

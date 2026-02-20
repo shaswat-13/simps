@@ -1,105 +1,144 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block title %}View Income - SIMPS{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block title %}View Income -
+SIMPS{% endblock %} {% block content %}
 <div class="max-w-7xl mx-auto px-4 py-8">
-    <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-gray-900">Income History</h1>
-        <a href="{% url 'dashboard:add_income_page' %}" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition font-medium shadow-md">
-            <i class="fas fa-plus mr-2"></i> Add Income
-        </a>
-    </div>
-
-    <div id="message" class="hidden mb-4 p-4 rounded-lg"></div>
-
-    <div class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100">
-        <div class="overflow-x-auto">
-            <table class="w-full">
-                <thead class="bg-indigo-50 border-b border-indigo-100">
-                    <tr>
-                        <th class="px-6 py-4 text-left text-sm font-semibold text-indigo-900">Date</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold text-indigo-900">Source</th>
-                        <th class="px-6 py-4 text-right text-sm font-semibold text-indigo-900">Amount</th>
-                        <th class="px-6 py-4 text-center text-sm font-semibold text-indigo-900">Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="incomeTableBody" class="divide-y divide-gray-100">
-                    </tbody>
-            </table>
-        </div>
-        
-        <div id="emptyState" class="hidden p-12 text-center text-gray-500">
-            <i class="fas fa-inbox text-5xl mb-4 text-gray-300"></i>
-            <p class="text-lg">No income records found. Start by adding your first income!</p>
-        </div>
-    </div>
-
-    <a href="{% url 'dashboard:dashboard_home' %}" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 mt-6 font-medium">
-        <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-900">Income History</h1>
+    <a
+      href="{% url 'dashboard:add_income_page' %}"
+      class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-medium shadow-md"
+    >
+      <i class="fas fa-plus mr-2"></i> Add Income
     </a>
-</div>
-{% endblock %}
+  </div>
 
-{% block extra_scripts %}
+  <div id="message" class="hidden mb-4 p-4 rounded-lg"></div>
+
+  <div
+    class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100"
+  >
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="bg-blue-50 border-b border-blue-100">
+          <tr>
+            <th class="px-6 py-4 text-left text-sm font-semibold text-blue-900">
+              Date
+            </th>
+            <th class="px-6 py-4 text-left text-sm font-semibold text-blue-900">
+              Source
+            </th>
+            <th
+              class="px-6 py-4 text-right text-sm font-semibold text-blue-900"
+            >
+              Amount
+            </th>
+            <th
+              class="px-6 py-4 text-center text-sm font-semibold text-blue-900"
+            >
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody id="incomeTableBody" class="divide-y divide-gray-100"></tbody>
+      </table>
+    </div>
+
+    <div id="emptyState" class="hidden p-12 text-center text-gray-500">
+      <i class="fas fa-inbox text-5xl mb-4 text-gray-300"></i>
+      <p class="text-lg">
+        No income records found. Start by adding your first income!
+      </p>
+    </div>
+  </div>
+
+  <a
+    href="{% url 'dashboard:dashboard_home' %}"
+    class="inline-flex items-center text-blue-600 hover:text-blue-800 mt-6 font-medium"
+  >
+    <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+  </a>
+</div>
+{% endblock %} {% block extra_scripts %}
 <script>
-    async function loadIncomeData() {
-        try {
-            const response = await fetch("{% url 'dashboard:get_income' %}?user_id=1");
-            const result = await response.json();
-            const tableBody = document.getElementById('incomeTableBody');
-            const emptyState = document.getElementById('emptyState');
-            
-            if (result.status === 'success' && result.data.length > 0) {
-                tableBody.innerHTML = '';
-                emptyState.classList.add('hidden');
-                result.data.forEach(income => {
-                    tableBody.innerHTML += `
+  async function loadIncomeData() {
+    try {
+      const response = await fetch(
+        "{% url 'dashboard:get_income' %}?user_id=1",
+      );
+      const result = await response.json();
+      const tableBody = document.getElementById("incomeTableBody");
+      const emptyState = document.getElementById("emptyState");
+
+      if (result.status === "success" && result.data.length > 0) {
+        tableBody.innerHTML = "";
+        emptyState.classList.add("hidden");
+        result.data.forEach((income) => {
+          tableBody.innerHTML += `
                         <tr class="hover:bg-gray-50 transition">
                             <td class="px-6 py-4 text-sm text-gray-900 font-medium">${getMonthName(income.month)} ${income.year}</td>
                             <td class="px-6 py-4 text-sm text-gray-600">${income.source}</td>
                             <td class="px-6 py-4 text-sm text-gray-900 text-right font-bold">$${parseFloat(income.amount).toFixed(2)}</td>
                             <td class="px-6 py-4 text-center">
-                                <button onclick="deleteIncome(${income.income_id})" class="text-rose-500 hover:text-rose-700 p-2 transition">
+                                <button onclick="deleteIncome(${income.income_id})" class="text-red-500 hover:text-red-700 p-2 transition">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
                         </tr>`;
-                });
-            } else {
-                tableBody.innerHTML = '';
-                emptyState.classList.remove('hidden');
-            }
-        } catch (error) { showMessage('Error loading data', 'error'); }
+        });
+      } else {
+        tableBody.innerHTML = "";
+        emptyState.classList.remove("hidden");
+      }
+    } catch (error) {
+      showMessage("Error loading data", "error");
     }
+  }
 
-    async function deleteIncome(incomeId) {
-        if (!confirm('Are you sure?')) return;
-        try {
-            const response = await fetch("{% url 'dashboard:delete_income' %}", {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}' },
-                body: JSON.stringify({ income_id: incomeId })
-            });
-            const result = await response.json();
-            if (result.status === 'success') {
-                showMessage('Entry deleted!', 'success');
-                loadIncomeData();
-            }
-        } catch (error) { showMessage('Delete failed', 'error'); }
+  async function deleteIncome(incomeId) {
+    if (!confirm("Are you sure?")) return;
+    try {
+      const response = await fetch("{% url 'dashboard:delete_income' %}", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": "{{ csrf_token }}",
+        },
+        body: JSON.stringify({ income_id: incomeId }),
+      });
+      const result = await response.json();
+      if (result.status === "success") {
+        showMessage("Entry deleted!", "success");
+        loadIncomeData();
+      }
+    } catch (error) {
+      showMessage("Delete failed", "error");
     }
+  }
 
-    function getMonthName(m) { return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][m - 1]; }
+  function getMonthName(m) {
+    return [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ][m - 1];
+  }
 
-    function showMessage(text, type) {
-        const div = document.getElementById('message');
-        div.className = `mb-4 p-4 rounded-lg ${type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`;
-        div.textContent = text;
-        div.classList.remove('hidden');
-        setTimeout(() => div.classList.add('hidden'), 3000);
-    }
+  function showMessage(text, type) {
+    const div = document.getElementById("message");
+    div.className = `mb-4 p-4 rounded-lg ${type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`;
+    div.textContent = text;
+    div.classList.remove("hidden");
+    setTimeout(() => div.classList.add("hidden"), 3000);
+  }
 
-    loadIncomeData();
+  loadIncomeData();
 </script>
 {% endblock %}

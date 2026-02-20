@@ -1,128 +1,206 @@
-{%extends 'base.html'%}
-{% load static %}
-{% block title %}Portfolio - SIMPS{% endblock %}
-{% block extra_head %}
-    <script src="{% static 'portfolio/portfolio.js' %}"></script>
-{% endblock %}
-{%block content%}
+{%extends 'base.html'%} {% load static %} {% block title %}Portfolio - SIMPS{%
+endblock %} {% block extra_head %}
+<script src="{% static 'portfolio/portfolio.js' %}"></script>
+{% endblock %} {%block content%}
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+  <h1
+    class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 lg:mb-10"
+  >
+    {{username}}'s Portfolio
+  </h1>
 
-        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 lg:mb-10">
-            {{username}}'s Portfolio
-        </h1>
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-10"
+  >
+    <div
+      class="bg-white shadow-lg rounded-xl p-4 lg:p-6 hover:shadow-2xl transition-shadow"
+    >
+      <p class="text-gray-600 text-xs sm:text-sm mb-1 lg:mb-2">
+        Total Invested
+      </p>
+      <p
+        id="total-invest"
+        data-value="{{ invest }}"
+        class="text-gray-900 text-xl lg:text-2xl font-bold"
+      >
+        ${{invest}}
+      </p>
+    </div>
+    <div
+      class="bg-white shadow-lg rounded-xl p-4 lg:p-6 hover:shadow-2xl transition-shadow"
+    >
+      <p class="text-gray-600 text-xs sm:text-sm mb-1 lg:mb-2">Total Value</p>
+      <p
+        id="total-current"
+        data-value="{{ current }}"
+        class="text-gray-900 text-xl lg:text-2xl font-bold"
+      >
+        ${{current}}
+      </p>
+    </div>
+    <div
+      class="bg-white shadow-lg rounded-xl p-4 lg:p-6 hover:shadow-2xl transition-shadow"
+    >
+      <p class="text-gray-600 text-xs sm:text-sm mb-1 lg:mb-2">
+        Total Gain / Loss
+      </p>
+      <p
+        id="total-pl"
+        data-value="{{ total_p_l }}"
+        class="text-xl lg:text-2xl font-bold {% if total_p_l >= 0 %}text-green-500{% else %}text-red-500{% endif %}"
+      >
+        ${{total_p_l}}
+      </p>
+    </div>
+    <div
+      class="bg-white shadow-lg rounded-xl p-4 lg:p-6 hover:shadow-2xl transition-shadow"
+    >
+      <p class="text-gray-600 text-xs sm:text-sm mb-1 lg:mb-2">
+        Percent Gain / Loss
+      </p>
+      <p
+        id="total-percent"
+        data-value="{{ total_prcnt }}"
+        class="text-xl lg:text-2xl font-bold {% if total_prcnt >= 0 %}text-green-500{% else %}text-red-500{% endif %}"
+      >
+        {{total_prcnt}}%
+      </p>
+    </div>
+  </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-10">
-            <div class="bg-white shadow-lg rounded-xl p-4 lg:p-6 hover:shadow-2xl transition-shadow">
-                <p class="text-gray-600 text-xs sm:text-sm mb-1 lg:mb-2">Total Invested</p>
-                <p id="total-invest" data-value="{{ invest }}" class="text-gray-900 text-xl lg:text-2xl font-bold">
-                    ${{invest}}
-                </p>
-            </div>
-            <div class="bg-white shadow-lg rounded-xl p-4 lg:p-6 hover:shadow-2xl transition-shadow">
-                <p class="text-gray-600 text-xs sm:text-sm mb-1 lg:mb-2">Total Value</p>
-                <p id="total-current" data-value="{{ current }}" class="text-gray-900 text-xl lg:text-2xl font-bold">
-                    ${{current}}
-                </p>
-            </div>
-            <div class="bg-white shadow-lg rounded-xl p-4 lg:p-6 hover:shadow-2xl transition-shadow">
-                <p class="text-gray-600 text-xs sm:text-sm mb-1 lg:mb-2">Total Gain / Loss</p>
-                <p id="total-pl" data-value="{{ total_p_l }}" class="text-xl lg:text-2xl font-bold {% if total_p_l >= 0 %}text-emerald-500{% else %}text-rose-500{% endif %}">
-                    ${{total_p_l}}
-                </p>
-            </div>
-            <div class="bg-white shadow-lg rounded-xl p-4 lg:p-6 hover:shadow-2xl transition-shadow">
-                <p class="text-gray-600 text-xs sm:text-sm mb-1 lg:mb-2">Percent Gain / Loss</p>
-                <p id="total-percent" data-value="{{ total_prcnt }}" class="text-xl lg:text-2xl font-bold {% if total_prcnt >= 0 %}text-emerald-500{% else %}text-rose-500{% endif %}">
-                    {{total_prcnt}}%
-                </p>
-            </div>
-        </div>
-
-       <div class="bg-white shadow-lg rounded-xl overflow-hidden">
+  <div class="bg-white shadow-lg rounded-xl overflow-hidden">
     <div class="overflow-x-auto">
-        <table class="w-full text-sm border-collapse">
-            <thead class="bg-indigo-100 text-gray-900">
-                <tr>
-                    <th class="px-3 sm:px-4 lg:px-6 py-3 text-left text-xs sm:text-sm">Asset</th>
-                    <th class="px-3 sm:px-4 lg:px-6 py-3 text-left text-xs sm:text-sm hidden md:table-cell">Type</th>
-                    <th class="px-3 sm:px-4 lg:px-6 py-3 text-right text-xs sm:text-sm  lg:table-cell">Quantity</th>
-                    <th class="px-3 sm:px-4 lg:px-6 py-3 text-right text-xs sm:text-sm hidden lg:table-cell">Purchase</th>
-                    <th class="px-3 sm:px-4 lg:px-6 py-3 text-right text-xs sm:text-sm">Current</th>
-                    <th class="px-3 sm:px-4 lg:px-6 py-3 text-right text-xs sm:text-sm">Gain/Loss</th>
-                    <th class="px-3 sm:px-4 lg:px-6 py-3 text-center text-xs sm:text-sm">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200">
-                {% for holding in holdings %}
-                    <tr id="holding-{{ holding.id }}" data-invest="{{ holding.invest_value }}"
-                    data-current="{{ holding.current_value }}"
-                    data-pl="{{ holding.profit_loss }}" data-symbol="{{holding.symbol}}" 
-                    class="hover:bg-gray-50 transition-colors">
-                        
-                        <td class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
-                            <div class="font-medium text-gray-900 text-xs sm:text-sm">{{holding.name}}</div>
-                            <div class="text-xs text-gray-500 md:hidden">{{holding.type}}</div>
-                        </td>
+      <table class="w-full text-sm border-collapse">
+        <thead class="bg-blue-100 text-gray-900">
+          <tr>
+            <th class="px-3 sm:px-4 lg:px-6 py-3 text-left text-xs sm:text-sm">
+              Asset
+            </th>
+            <th
+              class="px-3 sm:px-4 lg:px-6 py-3 text-left text-xs sm:text-sm hidden md:table-cell"
+            >
+              Type
+            </th>
+            <th
+              class="px-3 sm:px-4 lg:px-6 py-3 text-right text-xs sm:text-sm lg:table-cell"
+            >
+              Quantity
+            </th>
+            <th
+              class="px-3 sm:px-4 lg:px-6 py-3 text-right text-xs sm:text-sm hidden lg:table-cell"
+            >
+              Purchase
+            </th>
+            <th class="px-3 sm:px-4 lg:px-6 py-3 text-right text-xs sm:text-sm">
+              Current
+            </th>
+            <th class="px-3 sm:px-4 lg:px-6 py-3 text-right text-xs sm:text-sm">
+              Gain/Loss
+            </th>
+            <th
+              class="px-3 sm:px-4 lg:px-6 py-3 text-center text-xs sm:text-sm"
+            >
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          {% for holding in holdings %}
+          <tr
+            id="holding-{{ holding.id }}"
+            data-invest="{{ holding.invest_value }}"
+            data-current="{{ holding.current_value }}"
+            data-pl="{{ holding.profit_loss }}"
+            data-symbol="{{holding.symbol}}"
+            class="hover:bg-gray-50 transition-colors"
+          >
+            <td class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
+              <div class="font-medium text-gray-900 text-xs sm:text-sm">
+                {{holding.name}}
+              </div>
+              <div class="text-xs text-gray-500 md:hidden">
+                {{holding.type}}
+              </div>
+            </td>
 
-                        <td class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-gray-700 text-xs sm:text-sm hidden md:table-cell">
-                            {{holding.type}}
-                        </td>
+            <td
+              class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-gray-700 text-xs sm:text-sm hidden md:table-cell"
+            >
+              {{holding.type}}
+            </td>
 
-                        <td class="quantity_cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-right text-gray-900 text-xs sm:text-sm lg:table-cell">
-                            {{holding.quantity}}
-                        </td>
+            <td
+              class="quantity_cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-right text-gray-900 text-xs sm:text-sm lg:table-cell"
+            >
+              {{holding.quantity}}
+            </td>
 
-                        <td class="purchase_price px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-right text-gray-900 text-xs sm:text-sm hidden lg:table-cell">
-                            ${{holding.purchase_price}}
-                        </td>
+            <td
+              class="purchase_price px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-right text-gray-900 text-xs sm:text-sm hidden lg:table-cell"
+            >
+              ${{holding.purchase_price}}
+            </td>
 
-                        <td class="current_price px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-right text-gray-900 text-xs sm:text-sm">
-                            ${{holding.current_price}}
-                        </td>
+            <td
+              class="current_price px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-right text-gray-900 text-xs sm:text-sm"
+            >
+              ${{holding.current_price}}
+            </td>
 
-                        <td class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-right font-semibold text-xs sm:text-sm">
-                            {% if holding.percentage >= 0 %}
-                                <span class="text-emerald-500 flex items-center justify-end space-x-1">
-                                    <span>{{holding.percentage}}%</span>
-                                    <i class="fa-solid fa-arrow-trend-up text-xs"></i>
-                                </span>
-                            {% else %}
-                                <span class="text-rose-500 flex items-center justify-end space-x-1">
-                                    <span>{{holding.percentage}}%</span>
-                                    <i class="fa-solid fa-arrow-trend-down text-xs"></i>
-                                </span>
-                            {% endif %}
-                        </td>
+            <td
+              class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-right font-semibold text-xs sm:text-sm"
+            >
+              {% if holding.percentage >= 0 %}
+              <span
+                class="text-green-500 flex items-center justify-end space-x-1"
+              >
+                <span>{{holding.percentage}}%</span>
+                <i class="fa-solid fa-arrow-trend-up text-xs"></i>
+              </span>
+              {% else %}
+              <span
+                class="text-red-500 flex items-center justify-end space-x-1"
+              >
+                <span>{{holding.percentage}}%</span>
+                <i class="fa-solid fa-arrow-trend-down text-xs"></i>
+              </span>
+              {% endif %}
+            </td>
 
-                        <td class="px-2 sm:px-3 lg:px-6 py-3 sm:py-4 text-center">
-                            <div class="flex flex-col sm:flex-row gap-1 sm:gap-2 justify-center">
-                                <button class="edit_btn px-2 py-1 bg-indigo-500 text-white rounded text-xs hover:bg-indigo-600 transition whitespace-nowrap cursor-pointer"
-                                data-portfolio-id="{{holding.id}}" data-url="{% url 'portfolio:edit_holding' holding.id %}">
-                                    Edit
-                                </button>
-                                <button class="delete_btn px-2 py-1 bg-rose-600 text-white rounded text-xs hover:bg-rose-700 transition whitespace-nowrap cursor-pointer"
-                                data-portfolio-id="{{holding.id}}" data-url="{% url 'portfolio:delete_holding' holding.id %}">
-                                    Delete
-                                </button>
-                            </div>
-                        </td>
-
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+            <td class="px-2 sm:px-3 lg:px-6 py-3 sm:py-4 text-center">
+              <div
+                class="flex flex-col sm:flex-row gap-1 sm:gap-2 justify-center"
+              >
+                <button
+                  class="edit_btn px-2 py-1 bg-blue-500 text-white rounded text-xs hover:bg-blue-600 transition whitespace-nowrap cursor-pointer"
+                  data-portfolio-id="{{holding.id}}"
+                  data-url="{% url 'portfolio:edit_holding' holding.id %}"
+                >
+                  Edit
+                </button>
+                <button
+                  class="delete_btn px-2 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700 transition whitespace-nowrap cursor-pointer"
+                  data-portfolio-id="{{holding.id}}"
+                  data-url="{% url 'portfolio:delete_holding' holding.id %}"
+                >
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
-    <div class="bg-white shadow-lg rounded-xl p-4 lg:p-6 mb-6 lg:mb-10 mt-8">
+  </div>
+  <div class="bg-white shadow-lg rounded-xl p-4 lg:p-6 mb-6 lg:mb-10 mt-8">
     <h2 class="text-lg lg:text-xl font-bold text-gray-900 mb-4">
-        Portfolio Performance (Last 30 Days)
+      Portfolio Performance (Last 30 Days)
     </h2>
-    <div class="relative" style="height: 300px;">
-        <canvas id="portfolioChart"></canvas>
+    <div class="relative" style="height: 300px">
+      <canvas id="portfolioChart"></canvas>
     </div>
-    </div>
-    
-
-    </div>
+  </div>
+</div>
 {%endblock%}
