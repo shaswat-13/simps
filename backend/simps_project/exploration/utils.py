@@ -22,13 +22,12 @@ def get_current_savings(user_id):
 def get_next_equity(user_id):
     with connection.cursor() as cursor:
         cursor.execute("""
-            SELECT equity_id, symbol, equity_name, current_price, sector
-            FROM Global_Equities
-            WHERE equity_id NOT IN (
-                SELECT equity_id
-                FROM Personal_Portfolio
-                WHERE user_id = %s
-            )
+            SELECT ge.equity_id, ge.symbol, ge.equity_name, ge.current_price, ge.sector
+            FROM Global_Equities ge
+            LEFT JOIN Personal_Portfolio pp 
+                ON ge.equity_id = pp.equity_id 
+                AND pp.user_id = %s
+            WHERE pp.equity_id IS NULL
             ORDER BY RANDOM()
             LIMIT 1
         """, [user_id])
@@ -80,25 +79,13 @@ def process_purchase(user_id, equity_id, amount):
 
         # 3. Handle Personal Portfolio (Update or Insert)
         cursor.execute("""
-            SELECT portfolio_id FROM Personal_Portfolio
-            WHERE user_id = %s AND equity_id = %s
-            FOR UPDATE
-        """, [user_id, equity_id])
-        
-        existing = cursor.fetchone()
-        if existing:
-            cursor.execute("""
-                UPDATE Personal_Portfolio
-                SET quantity = quantity + %s
-                WHERE portfolio_id = %s
-            """, [quantity, existing[0]])
-        else:
-            cursor.execute("""
-                INSERT INTO Personal_Portfolio
+            INSERT INTO Personal_Portfolio 
                 (user_id, equity_id, quantity, purchase_price, date_added)
-                VALUES (%s, %s, %s, %s, %s)
-            """, [user_id, equity_id, quantity, price, now.date()])
-
+            VALUES (%s, %s, %s, %s, %s)
+            ON CONFLICT (user_id, equity_id)
+            DO UPDATE SET 
+                quantity = Personal_Portfolio.quantity + EXCLUDED.quantity
+        """, [user_id, equity_id, quantity, price, now.date()])
         # 4. Insert expense with the dynamic name
         # We use Python string formatting for the category text
         category_text = f"Equity Purchase: {equity_name}"

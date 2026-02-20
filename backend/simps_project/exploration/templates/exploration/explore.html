@@ -4,17 +4,48 @@
 {% block title %}Explore Equities - SIMPS{% endblock %}
 {%block extra_head %}
 <style>
+  /* Your existing swipe-out animations */
   @keyframes swipe-left {
-    0%   { transform: translateX(0) ; opacity: 1; }
+    0%   { transform: translateX(0); opacity: 1; }
     100% { transform: translateX(-140%); opacity: 0; }
   }
+  
   @keyframes swipe-right {
     0%   { transform: translateX(0); opacity: 1; }
     100% { transform: translateX(140%); opacity: 0; }
   }
+  
+  /* NEW: Slide-in animations for when page loads */
+  @keyframes slide-in-from-right {
+    0%   { transform: translateX(140%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes slide-in-from-left {
+    0%   { transform: translateX(-140%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  
+  /* Your existing classes */
   .swipe-left  { animation: swipe-left  0.4s ease-in forwards; }
   .swipe-right { animation: swipe-right 0.4s ease-in forwards; }
+  
+  /* NEW: Classes for slide-in */
+  .slide-in-from-right { animation: slide-in-from-right 0.4s ease-out forwards; }
+  .slide-in-from-left  { animation: slide-in-from-left  0.4s ease-out forwards; }
+  
+  /* NEW: Initial state - card starts off-screen */
+  .card.entering-from-right {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+  
+  .card.entering-from-left {
+    transform: translateX(-140%);
+    opacity: 0;
+  }
 </style>
+
 {%endblock%}
 {% block content %}
 
