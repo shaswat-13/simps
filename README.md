@@ -35,7 +35,7 @@ SIMPS emphasizes strong relational database design, SQL-based modeling, and real
 ```bash
 Frontend (HTML, CSS, JS, Tailwind)
 ↓
-Django Backend (Business Logic & APIs)
+Django Backend (Business Logic)
 ↓
 PosgreSQL (Relational Database)
 
