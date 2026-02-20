@@ -5,16 +5,42 @@
 {%block extra_head %}
 <style>
   @keyframes swipe-left {
-    0%   { transform: translateX(0) ; opacity: 1; }
+    0%   { transform: translateX(0); opacity: 1; }
     100% { transform: translateX(-140%); opacity: 0; }
   }
+  
   @keyframes swipe-right {
     0%   { transform: translateX(0); opacity: 1; }
     100% { transform: translateX(140%); opacity: 0; }
   }
+  
+  @keyframes slide-in-from-right {
+    0%   { transform: translateX(140%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes slide-in-from-left {
+    0%   { transform: translateX(-140%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  
   .swipe-left  { animation: swipe-left  0.4s ease-in forwards; }
   .swipe-right { animation: swipe-right 0.4s ease-in forwards; }
+  
+  .slide-in-from-right { animation: slide-in-from-right 0.4s ease-out forwards; }
+  .slide-in-from-left  { animation: slide-in-from-left  0.4s ease-out forwards; }
+  
+  .card.entering-from-right {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+  
+  .card.entering-from-left {
+    transform: translateX(-140%);
+    opacity: 0;
+  }
 </style>
+
 {%endblock%}
 {% block content %}
 

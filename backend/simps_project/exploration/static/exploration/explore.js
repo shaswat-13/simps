@@ -1,35 +1,87 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
     const slider = document.querySelector(".amountSlider");
     const amountValue = document.querySelector(".amountValue");
     const buyBtn = document.getElementById("buyBtn");
     const skipBtn = document.getElementById("skipBtn");
-    const hiddenAmount = document.getElementById("hiddenAmount");
     const form = document.getElementById("buyForm");
     const card = document.querySelector(".card");
 
+    if (!slider || !card) return;
 
-    if (!slider) return;
+
+    const slideDirection = sessionStorage.getItem("slideDirection");
+
+    function triggerSlideIn(direction) {
+        const enteringClass =
+            direction === "from-right"
+                ? "entering-from-right"
+                : "entering-from-left";
+
+        const slideClass =
+            direction === "from-right"
+                ? "slide-in-from-right"
+                : "slide-in-from-left";
+
+        card.classList.add(enteringClass);
+
+        card.getBoundingClientRect();
+
+        card.classList.remove(enteringClass);
+        card.classList.add(slideClass);
+
+
+        card.addEventListener(
+            "animationend",
+            (e) => {
+                if (
+                    e.animationName !== "slide-in-from-right" &&
+                    e.animationName !== "slide-in-from-left"
+                ) return;
+
+                card.classList.remove(slideClass);
+            },
+            { once: true }
+        );
+    }
+
+    if (slideDirection === "from-right" || slideDirection === "from-left") {
+        triggerSlideIn(slideDirection);
+        sessionStorage.removeItem("slideDirection");
+    }
+
 
     slider.addEventListener("input", () => {
         amountValue.textContent = slider.value;
     });
 
-    // Helper function for animations
     function animateThen(cls, callback) {
-        const card = document.querySelector(".card"); 
+        const expected =
+            cls === "swipe-left" ? "swipe-left" : "swipe-right";
+
         card.classList.add(cls);
-        card.addEventListener("animationend", callback, { once: true });
+
+        card.addEventListener(
+            "animationend",
+            (e) => {
+                if (e.animationName !== expected) return;
+
+                // optional: hide so no ghost frame
+                card.style.display = "none";
+
+                callback?.();
+            },
+            { once: true }
+        );
     }
 
-    buyBtn.addEventListener("click", async () => {
-        // when 0 savings dont let them choose
-        if (buyBtn.disabled) return; 
-        // Prevent double clicks immediately
-        buyBtn.disabled = true; 
 
-        
+    buyBtn.addEventListener("click", async () => {
+        if (buyBtn.disabled) return;
+        buyBtn.disabled = true;
+
+        sessionStorage.setItem("slideDirection", "from-left");
+
         animateThen("swipe-right", async () => {
-            // Once animation ends, prepare the data
             const formData = new FormData(form);
             formData.set("amount", slider.value);
 
@@ -39,35 +91,35 @@ document.addEventListener("DOMContentLoaded", function () {
                     body: formData,
                     headers: {
                         "X-Requested-With": "XMLHttpRequest",
-                        // Include the CSRF token for Fetch
-                        "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value 
-                    }
+                        "X-CSRFToken": document.querySelector(
+                            "[name=csrfmiddlewaretoken]"
+                        ).value,
+                    },
                 });
 
                 if (response.ok) {
-                    // If successful, redirect to the next equity
-                    window.location.href = "/explore/"; 
+                    window.location.href = "/explore/";
                 } else {
                     const data = await response.json();
-                    
-                    // If error, bring the card back and alert
-                    const card = document.querySelector(".card");
-                    card.classList.remove("swipe-right"); 
-                    alert("⚠️ " + (data.error || "Insufficient funds to invest."));
+                    sessionStorage.removeItem("slideDirection");
+                    alert("⚠️ " + (data.error || "Insufficient funds."));
                     buyBtn.disabled = false;
                 }
-            } catch (error) {
-                console.error("Error:", error);
-                const card = document.querySelector(".card");
-                card.classList.remove("swipe-right");
-                alert("An unexpected error occurred.");
+            } catch (err) {
+                console.error(err);
+                sessionStorage.removeItem("slideDirection");
+                alert("Unexpected error occurred.");
                 buyBtn.disabled = false;
             }
         });
     });
 
+
+
     skipBtn.addEventListener("click", () => {
-        animateThen("swipe-left",()=>{
+        sessionStorage.setItem("slideDirection", "from-right");
+
+        animateThen("swipe-left", () => {
             window.location.reload();
         });
     });

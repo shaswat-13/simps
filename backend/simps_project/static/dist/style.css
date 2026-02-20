@@ -22,36 +22,16 @@
     --color-green-600: oklch(62.7% 0.194 149.214);
     --color-green-700: oklch(52.7% 0.154 150.069);
     --color-green-900: oklch(39.3% 0.095 152.535);
-    --color-emerald-50: oklch(97.9% 0.021 166.113);
-    --color-emerald-100: oklch(95% 0.052 163.051);
-    --color-emerald-200: oklch(90.5% 0.093 164.15);
     --color-emerald-500: oklch(69.6% 0.17 162.48);
-    --color-emerald-600: oklch(59.6% 0.145 163.225);
-    --color-emerald-700: oklch(50.8% 0.118 165.612);
     --color-blue-50: oklch(97% 0.014 254.604);
     --color-blue-100: oklch(93.2% 0.032 255.585);
+    --color-blue-300: oklch(80.9% 0.105 251.813);
     --color-blue-400: oklch(70.7% 0.165 254.624);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-blue-600: oklch(54.6% 0.245 262.881);
     --color-blue-700: oklch(48.8% 0.243 264.376);
     --color-blue-800: oklch(42.4% 0.199 265.638);
-    --color-indigo-50: oklch(96.2% 0.018 272.314);
-    --color-indigo-100: oklch(93% 0.034 272.788);
-    --color-indigo-300: oklch(78.5% 0.115 274.713);
-    --color-indigo-400: oklch(67.3% 0.182 276.935);
-    --color-indigo-500: oklch(58.5% 0.233 277.117);
-    --color-indigo-600: oklch(51.1% 0.262 276.966);
-    --color-indigo-700: oklch(45.7% 0.24 277.023);
-    --color-indigo-800: oklch(39.8% 0.195 277.366);
-    --color-indigo-900: oklch(35.9% 0.144 278.697);
-    --color-rose-50: oklch(96.9% 0.015 12.422);
-    --color-rose-100: oklch(94.1% 0.03 12.58);
-    --color-rose-200: oklch(89.2% 0.058 10.001);
     --color-rose-500: oklch(64.5% 0.246 16.439);
-    --color-rose-600: oklch(58.6% 0.253 17.585);
-    --color-rose-700: oklch(51.4% 0.222 16.935);
-    --color-rose-800: oklch(45.5% 0.188 13.697);
-    --color-rose-900: oklch(41% 0.159 10.272);
     --color-gray-50: oklch(98.5% 0.002 247.839);
     --color-gray-100: oklch(96.7% 0.003 264.542);
     --color-gray-200: oklch(92.8% 0.006 264.531);
@@ -97,6 +77,7 @@
     --radius-xl: 0.75rem;
     --radius-2xl: 1rem;
     --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
@@ -405,14 +386,8 @@
   .flex-1 {
     flex: 1;
   }
-  .flex-shrink {
-    flex-shrink: 1;
-  }
   .shrink-0 {
     flex-shrink: 0;
-  }
-  .flex-grow {
-    flex-grow: 1;
   }
   .grow {
     flex-grow: 1;
@@ -428,9 +403,6 @@
   }
   .cursor-pointer {
     cursor: pointer;
-  }
-  .resize {
-    resize: both;
   }
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -589,12 +561,6 @@
   .border-blue-600 {
     border-color: var(--color-blue-600);
   }
-  .border-emerald-200 {
-    border-color: var(--color-emerald-200);
-  }
-  .border-emerald-500 {
-    border-color: var(--color-emerald-500);
-  }
   .border-gray-100 {
     border-color: var(--color-gray-100);
   }
@@ -616,15 +582,6 @@
   .border-green-500 {
     border-color: var(--color-green-500);
   }
-  .border-indigo-100 {
-    border-color: var(--color-indigo-100);
-  }
-  .border-indigo-500 {
-    border-color: var(--color-indigo-500);
-  }
-  .border-indigo-600 {
-    border-color: var(--color-indigo-600);
-  }
   .border-red-100 {
     border-color: var(--color-red-100);
   }
@@ -633,15 +590,6 @@
   }
   .border-red-500 {
     border-color: var(--color-red-500);
-  }
-  .border-rose-100 {
-    border-color: var(--color-rose-100);
-  }
-  .border-rose-200 {
-    border-color: var(--color-rose-200);
-  }
-  .border-rose-500 {
-    border-color: var(--color-rose-500);
   }
   .bg-blue-50 {
     background-color: var(--color-blue-50);
@@ -654,15 +602,6 @@
   }
   .bg-blue-600 {
     background-color: var(--color-blue-600);
-  }
-  .bg-emerald-50 {
-    background-color: var(--color-emerald-50);
-  }
-  .bg-emerald-100 {
-    background-color: var(--color-emerald-100);
-  }
-  .bg-emerald-500 {
-    background-color: var(--color-emerald-500);
   }
   .bg-gray-50 {
     background-color: var(--color-gray-50);
@@ -688,18 +627,6 @@
   .bg-green-600 {
     background-color: var(--color-green-600);
   }
-  .bg-indigo-50 {
-    background-color: var(--color-indigo-50);
-  }
-  .bg-indigo-100 {
-    background-color: var(--color-indigo-100);
-  }
-  .bg-indigo-500 {
-    background-color: var(--color-indigo-500);
-  }
-  .bg-indigo-600 {
-    background-color: var(--color-indigo-600);
-  }
   .bg-red-50 {
     background-color: var(--color-red-50);
   }
@@ -711,18 +638,6 @@
   }
   .bg-red-600 {
     background-color: var(--color-red-600);
-  }
-  .bg-rose-50 {
-    background-color: var(--color-rose-50);
-  }
-  .bg-rose-100 {
-    background-color: var(--color-rose-100);
-  }
-  .bg-rose-500 {
-    background-color: var(--color-rose-500);
-  }
-  .bg-rose-600 {
-    background-color: var(--color-rose-600);
   }
   .bg-white {
     background-color: var(--color-white);
@@ -878,14 +793,11 @@
   .text-blue-600 {
     color: var(--color-blue-600);
   }
+  .text-blue-800 {
+    color: var(--color-blue-800);
+  }
   .text-emerald-500 {
     color: var(--color-emerald-500);
-  }
-  .text-emerald-600 {
-    color: var(--color-emerald-600);
-  }
-  .text-emerald-700 {
-    color: var(--color-emerald-700);
   }
   .text-gray-300 {
     color: var(--color-gray-300);
@@ -920,21 +832,6 @@
   .text-green-900 {
     color: var(--color-green-900);
   }
-  .text-indigo-400 {
-    color: var(--color-indigo-400);
-  }
-  .text-indigo-500 {
-    color: var(--color-indigo-500);
-  }
-  .text-indigo-600 {
-    color: var(--color-indigo-600);
-  }
-  .text-indigo-800 {
-    color: var(--color-indigo-800);
-  }
-  .text-indigo-900 {
-    color: var(--color-indigo-900);
-  }
   .text-red-500 {
     color: var(--color-red-500);
   }
@@ -950,15 +847,6 @@
   .text-rose-500 {
     color: var(--color-rose-500);
   }
-  .text-rose-600 {
-    color: var(--color-rose-600);
-  }
-  .text-rose-700 {
-    color: var(--color-rose-700);
-  }
-  .text-rose-900 {
-    color: var(--color-rose-900);
-  }
   .text-white {
     color: var(--color-white);
   }
@@ -967,9 +855,6 @@
   }
   .italic {
     font-style: italic;
-  }
-  .underline {
-    text-decoration-line: underline;
   }
   .placeholder-gray-400 {
     &::placeholder {
@@ -991,10 +876,6 @@
   .shadow-xl {
     --tw-shadow: 0 20px 25px -5px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 8px 10px -6px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
   }
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
@@ -1028,6 +909,17 @@
     --tw-ease: var(--ease-in);
     transition-timing-function: var(--ease-in);
   }
+  .ease-out {
+    --tw-ease: var(--ease-out);
+    transition-timing-function: var(--ease-out);
+  }
+  .hover\:bg-blue-500 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-blue-500);
+      }
+    }
+  }
   .hover\:bg-blue-600 {
     &:hover {
       @media (hover: hover) {
@@ -1039,20 +931,6 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-blue-700);
-      }
-    }
-  }
-  .hover\:bg-emerald-100 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-emerald-100);
-      }
-    }
-  }
-  .hover\:bg-emerald-600 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-emerald-600);
       }
     }
   }
@@ -1098,27 +976,6 @@
       }
     }
   }
-  .hover\:bg-indigo-500 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-indigo-500);
-      }
-    }
-  }
-  .hover\:bg-indigo-600 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-indigo-600);
-      }
-    }
-  }
-  .hover\:bg-indigo-700 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-indigo-700);
-      }
-    }
-  }
   .hover\:bg-red-100 {
     &:hover {
       @media (hover: hover) {
@@ -1140,24 +997,10 @@
       }
     }
   }
-  .hover\:bg-rose-100 {
+  .hover\:text-blue-300 {
     &:hover {
       @media (hover: hover) {
-        background-color: var(--color-rose-100);
-      }
-    }
-  }
-  .hover\:bg-rose-600 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-rose-600);
-      }
-    }
-  }
-  .hover\:bg-rose-700 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-rose-700);
+        color: var(--color-blue-300);
       }
     }
   }
@@ -1175,27 +1018,6 @@
       }
     }
   }
-  .hover\:text-indigo-300 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-indigo-300);
-      }
-    }
-  }
-  .hover\:text-indigo-600 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-indigo-600);
-      }
-    }
-  }
-  .hover\:text-indigo-800 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-indigo-800);
-      }
-    }
-  }
   .hover\:text-red-700 {
     &:hover {
       @media (hover: hover) {
@@ -1207,20 +1029,6 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-red-800);
-      }
-    }
-  }
-  .hover\:text-rose-700 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-rose-700);
-      }
-    }
-  }
-  .hover\:text-rose-800 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-rose-800);
       }
     }
   }
@@ -1262,16 +1070,6 @@
   .focus\:ring-blue-500 {
     &:focus {
       --tw-ring-color: var(--color-blue-500);
-    }
-  }
-  .focus\:ring-indigo-500 {
-    &:focus {
-      --tw-ring-color: var(--color-indigo-500);
-    }
-  }
-  .focus\:ring-rose-500 {
-    &:focus {
-      --tw-ring-color: var(--color-rose-500);
     }
   }
   .focus\:outline-none {
@@ -1607,11 +1405,6 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-duration {
   syntax: "*";
   inherits: false;
@@ -1648,7 +1441,6 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
-      --tw-outline-style: solid;
       --tw-duration: initial;
       --tw-ease: initial;
     }
