@@ -178,6 +178,7 @@ def portfolio_chart(request):
                 AND DATE(recorded_at) >= CURRENT_DATE - INTERVAL '30 days'
             ) ph ON pp.equity_id = ph.equity_id
             WHERE pp.user_id = %s
+                AND ph.price_date >= pp.date_added
             GROUP BY ph.price_date
             ORDER BY ph.price_date ASC
         """, [user_id])
