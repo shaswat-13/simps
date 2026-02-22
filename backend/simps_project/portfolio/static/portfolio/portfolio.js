@@ -228,15 +228,15 @@ document.addEventListener('DOMContentLoaded',()=>
         percentEl.innerText = totalPercent.toFixed(2) + '%';
         percentEl.dataset.value =  totalPercent.toFixed(2);
         
-        plCardEl.classList.toggle('text-green-500', totalPL >=0);
-        plCardEl.classList.toggle('text-red-500', totalPL <=0);
+        plCardEl.classList.toggle('border-green-500', totalPL >=0);
+        plCardEl.classList.toggle('border-red-500', totalPL <=0);
         percentCardEl.classList.toggle('border-green-500', totalPL >=0);
         percentCardEl.classList.toggle('border-red-500', totalPL <=0);
         
         plEl.classList.toggle('text-green-500', totalPL >= 0);
         plEl.classList.toggle('text-red-500', totalPL < 0);
-        percentEl.classList.toggle('border-green-500', totalPL >= 0);
-        percentEl.classList.toggle('border-red-500', totalPL < 0);
+        percentEl.classList.toggle('text-green-500', totalPL >= 0);
+        percentEl.classList.toggle('text-red-500', totalPL < 0);
     }
 
     function loadPortfolioChart() {
