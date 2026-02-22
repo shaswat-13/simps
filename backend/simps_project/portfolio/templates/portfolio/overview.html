@@ -27,13 +27,13 @@
                     ${{current}}
                 </p>
             </div>
-            <div class="bg-white shadow-lg rounded-xl p-4 lg:p-6 hover:shadow-2xl transition-shadow border-t-4 {% if total_p_l >= 0 %}border-green-500{% else %}border-red-500{% endif %}">
+            <div id = "plcard" class="bg-white shadow-lg rounded-xl p-4 lg:p-6 hover:shadow-2xl transition-shadow border-t-4 {% if total_p_l >= 0 %}border-green-500{% else %}border-red-500{% endif %}">
                 <p class="text-gray-600 text-xs sm:text-sm mb-1 lg:mb-2">Total Gain / Loss</p>
                 <p id="total-pl" data-value="{{ total_p_l }}" class="text-xl lg:text-2xl font-bold {% if total_p_l >= 0 %}text-green-600{% else %}text-red-600{% endif %}">
                     ${{total_p_l}}
                 </p>
             </div>
-            <div class="bg-white shadow-lg rounded-xl p-4 lg:p-6 hover:shadow-2xl transition-shadow border-t-4 {% if total_prcnt >= 0 %}border-green-500{% else %}border-red-500{% endif %}">
+            <div id = "percentcard" class="bg-white shadow-lg rounded-xl p-4 lg:p-6 hover:shadow-2xl transition-shadow border-t-4 {% if total_prcnt >= 0 %}border-green-500{% else %}border-red-500{% endif %}">
                 <p class="text-gray-600 text-xs sm:text-sm mb-1 lg:mb-2">Percent Gain / Loss</p>
                 <p id="total-percent" data-value="{{ total_prcnt }}" class="text-xl lg:text-2xl font-bold {% if total_prcnt >= 0 %}text-green-600{% else %}text-red-600{% endif %}">
                     {{total_prcnt}}%
