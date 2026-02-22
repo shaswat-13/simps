@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded',()=>
         plCardEl.classList.toggle('border-green-500 text-green-500', totalPL >=0);
         plCardEl.classList.toggle('border-red-500 text-red-500', totalPL <=0);
         percentCardEl.classList.toggle('border-green-500 text-green-500', totalPL >=0);
-        percentCardEl.classList.toggle('border-red-500 text-red-500', totalPL <=0);
+        percentCardEl.classList.toggle('border-red-500 text-red-500', totalPL <0);
         
         plEl.classList.toggle('text-green-500', totalPL >= 0);
         plEl.classList.toggle('text-red-500', totalPL < 0);
