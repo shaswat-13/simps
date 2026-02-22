@@ -66,25 +66,25 @@ document.addEventListener('DOMContentLoaded',()=>
                     //Changing colors
                     totalEl.classList.remove('text-green-500', 'text-red-500');
                     totalperEl.classList.remove('text-green-500', 'text-red-500');
-                    plCardEl.classList.remove('text-green-500', 'text-red-500');
-                    percentCardEl.classList.remove('text-green-500', 'text-red-500');
+                    plCardEl.classList.remove('border-green-500', 'border-red-500');
+                    percentCardEl.classList.remove('border-green-500', 'border-red-500');
                     
                     if(totalPL >=0){
                         totalEl.classList.add('text-green-500');
-                        plCardEl.classList.add('text-green-500');
+                        plCardEl.classList.add('border-green-500');
                     }
                     else{
                         totalEl.classList.add('text-red-500');
-                        plCardEl.classList.add('text-red-500');
+                        plCardEl.classList.add('border-red-500');
                     }
 
                     if (totalPercent>=0){
                         totalperEl.classList.add('text-green-500');
-                        percentCardEl.classList.add('text-green-500');
+                        percentCardEl.classList.add('border-green-500');
                     }
                     else{
                         totalperEl.classList.add('text-red-500');
-                        percentCardEl.classList.add('text-red-500');
+                        percentCardEl.classList.add('border-red-500');
                     }
 
                     investEl.dataset.value =  totalInvest.toFixed(2);
@@ -230,13 +230,13 @@ document.addEventListener('DOMContentLoaded',()=>
         
         plCardEl.classList.toggle('text-green-500', totalPL >=0);
         plCardEl.classList.toggle('text-red-500', totalPL <=0);
-        percentCardEl.classList.toggle('text-green-500', totalPL >=0);
-        percentCardEl.classList.toggle('text-red-500', totalPL <=0);
+        percentCardEl.classList.toggle('border-green-500', totalPL >=0);
+        percentCardEl.classList.toggle('border-red-500', totalPL <=0);
         
         plEl.classList.toggle('text-green-500', totalPL >= 0);
         plEl.classList.toggle('text-red-500', totalPL < 0);
-        percentEl.classList.toggle('text-green-500', totalPL >= 0);
-        percentEl.classList.toggle('text-red-500', totalPL < 0);
+        percentEl.classList.toggle('border-green-500', totalPL >= 0);
+        percentEl.classList.toggle('border-red-500', totalPL < 0);
     }
 
     function loadPortfolioChart() {
