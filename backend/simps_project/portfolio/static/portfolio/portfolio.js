@@ -63,21 +63,21 @@ document.addEventListener('DOMContentLoaded',()=>
                     const totalperEl = document.getElementById('total-percent');
                     
                     //Changing colors
-                    totalEl.classList.remove('text-emerald-500', 'text-rose-500');
-                    totalperEl.classList.remove('text-emerald-500', 'text-rose-500');
+                    totalEl.classList.remove('text-green-500', 'text-red-500');
+                    totalperEl.classList.remove('text-green-500', 'text-red-500');
                     
                     if(totalPL >=0){
-                        totalEl.classList.add('text-emerald-500');
+                        totalEl.classList.add('text-green-500');
                     }
                     else{
-                        totalEl.classList.add('text-rose-500');
+                        totalEl.classList.add('text-red-500');
                     }
 
                     if (totalPercent>=0){
-                        totalperEl.classList.add('text-emerald-500');
+                        totalperEl.classList.add('text-green-500');
                     }
                     else{
-                        totalperEl.classList.add('text-rose-500');
+                        totalperEl.classList.add('text-red-500');
                     }
 
                     investEl.dataset.value =  totalInvest.toFixed(2);
