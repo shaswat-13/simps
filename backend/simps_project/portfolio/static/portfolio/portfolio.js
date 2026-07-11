@@ -254,22 +254,22 @@ document.addEventListener('DOMContentLoaded',()=>
 
     portfolioChart = new Chart(ctx.getContext('2d'), {
         type: 'line',
-        data: {
-            labels: data.dates,
-            datasets: [{
-                label: 'Portfolio Value',
-                data: data.values,
-                borderColor: 'rgb(99, 102, 241)',
-                backgroundColor: 'rgba(99, 102, 241, 0.1)',
-                borderWidth: 3,
-                fill: true,
-                tension: 0.4,
-                pointRadius: 4,
-                pointHoverRadius: 6,
-                pointBackgroundColor: 'rgb(99, 102, 241)',
-                pointBorderColor: '#fff',
-                pointBorderWidth: 2
-            }]
+       data: {
+    labels: data.dates,
+    datasets: [{
+        label: 'Portfolio Value',
+        data: data.values,
+        borderColor: 'rgb(59, 130, 246)',
+        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        pointBackgroundColor: 'rgb(59, 130, 246)',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
+    }]
         },
         options: {
             responsive: true,

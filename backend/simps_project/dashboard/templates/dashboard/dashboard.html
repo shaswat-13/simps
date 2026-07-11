@@ -11,39 +11,39 @@
     </h1>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <div class="bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition-shadow">
+        <div class="bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition-shadow border-t-4 border-green-500">
             <div class="flex items-center justify-between mb-2">
                 <p class="text-gray-600 text-sm">Total Income</p>
-                <i class="fas fa-arrow-up text-emerald-500 text-xl"></i>
+                <i class="fas fa-arrow-up text-green-500 text-xl"></i>
             </div>
             <p id="total-income" class="text-gray-900 text-3xl font-bold">$0.00</p>
             <p class="text-gray-500 text-xs mt-2">This month</p>
         </div>
 
-        <div class="bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition-shadow">
+        <div class="bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition-shadow border-t-4 border-red-500">
             <div class="flex items-center justify-between mb-2">
                 <p class="text-gray-600 text-sm">Total Expenses</p>
-                <i class="fas fa-arrow-down text-rose-500 text-xl"></i>
+                <i class="fas fa-arrow-down text-red-500 text-xl"></i>
             </div>
             <p id="total-expenses" class="text-gray-900 text-3xl font-bold">$0.00</p>
             <p class="text-gray-500 text-xs mt-2">This month</p>
         </div>
 
-        <div class="bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition-shadow">
+        <div class="bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition-shadow border-t-4 border-blue-500">
             <div class="flex items-center justify-between mb-2">
                 <p class="text-gray-600 text-sm">Net Savings</p>
-                <i class="fas fa-piggy-bank text-indigo-500 text-xl"></i>
+                <i class="fas fa-piggy-bank text-blue-500 text-xl"></i>
             </div>
-            <p id="net-savings" class="text-3xl font-bold text-indigo-600">$0.00</p>
+            <p id="net-savings" class="text-3xl font-bold text-blue-600">$0.00</p>
             <p class="text-gray-500 text-xs mt-2">This month</p>
         </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
         <a href="{% url 'dashboard:add_income_page' %}" class="block">
-            <div class="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-6 hover:bg-emerald-100 transition-colors cursor-pointer">
+            <div class="bg-green-50 border-2 border-green-200 rounded-xl p-6 hover:bg-green-100 transition-colors cursor-pointer">
                 <div class="flex items-center space-x-4">
-                    <div class="bg-emerald-500 text-white p-4 rounded-full">
+                    <div class="bg-green-500 text-white p-4 rounded-full">
                         <i class="fas fa-plus text-2xl"></i>
                     </div>
                     <div>
@@ -55,9 +55,9 @@
         </a>
 
         <a href="{% url 'dashboard:add_expense_page' %}" class="block">
-            <div class="bg-rose-50 border-2 border-rose-200 rounded-xl p-6 hover:bg-rose-100 transition-colors cursor-pointer">
+            <div class="bg-red-50 border-2 border-red-200 rounded-xl p-6 hover:bg-red-100 transition-colors cursor-pointer">
                 <div class="flex items-center space-x-4">
-                    <div class="bg-rose-500 text-white p-4 rounded-full">
+                    <div class="bg-red-500 text-white p-4 rounded-full">
                         <i class="fas fa-minus text-2xl"></i>
                     </div>
                     <div>
@@ -76,7 +76,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <a href="{% url 'dashboard:view_income_page' %}" class="block bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition">
             <div class="flex items-center space-x-4">
-                <i class="fas fa-list text-3xl text-emerald-500"></i>
+                <i class="fas fa-list text-3xl text-green-500"></i>
                 <div>
                     <h3 class="text-xl font-bold text-gray-900">View Income</h3>
                     <p class="text-gray-600 text-sm">See all income entries</p>
@@ -86,7 +86,7 @@
 
         <a href="{% url 'dashboard:view_expenses_page' %}" class="block bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition">
             <div class="flex items-center space-x-4">
-                <i class="fas fa-list text-3xl text-rose-500"></i>
+                <i class="fas fa-list text-3xl text-red-500"></i>
                 <div>
                     <h3 class="text-xl font-bold text-gray-900">View Expenses</h3>
                     <p class="text-gray-600 text-sm">See all expense entries</p>
@@ -96,7 +96,7 @@
 
         <a href="{% url 'dashboard:view_savings_page' %}" class="block bg-white shadow-lg rounded-xl p-6 hover:shadow-2xl transition">
             <div class="flex items-center space-x-4">
-                <i class="fas fa-chart-line text-3xl text-indigo-500"></i>
+                <i class="fas fa-chart-line text-3xl text-blue-500"></i>
                 <div>
                     <h3 class="text-xl font-bold text-gray-900">View Savings</h3>
                     <p class="text-gray-600 text-sm">Track your savings</p>
@@ -106,14 +106,14 @@
     </div>
 
     <div class="bg-white shadow-lg rounded-xl overflow-hidden">
-        <div class="px-6 py-4 bg-indigo-50 border-b">
+        <div class="px-6 py-4 bg-blue-50 border-b">
             <h2 class="text-xl font-bold text-gray-900">Quick Stats</h2>
         </div>
         <div class="p-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="flex items-center space-x-4">
-                    <div class="bg-emerald-100 p-3 rounded-full">
-                        <i class="fas fa-wallet text-emerald-600 text-2xl"></i>
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <i class="fas fa-wallet text-green-600 text-2xl"></i>
                     </div>
                     <div>
                         <p class="text-gray-600 text-sm">Income Entries</p>
@@ -121,8 +121,8 @@
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <div class="bg-rose-100 p-3 rounded-full">
-                        <i class="fas fa-receipt text-rose-600 text-2xl"></i>
+                    <div class="bg-red-100 p-3 rounded-full">
+                        <i class="fas fa-receipt text-red-600 text-2xl"></i>
                     </div>
                     <div>
                         <p class="text-gray-600 text-sm">Expense Entries</p>
@@ -143,7 +143,6 @@
         const year = currentDate.getFullYear();
 
         try {
-            // Updated paths to match dashboard namespace
             const incomeResponse = await fetch("{% url 'dashboard:get_income' %}");
             const expenseResponse = await fetch("{% url 'dashboard:get_expenses' %}");
             
